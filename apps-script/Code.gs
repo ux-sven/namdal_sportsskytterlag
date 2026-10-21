@@ -19,13 +19,14 @@ const CONFIG = {
     name: ['navn', 'fullt navn', 'medlemsnavn', 'name'],
     firstName: ['fornavn', 'first name'],
     lastName: ['etternavn', 'last name'],
+    memberNo: ['medlemsnummer', 'medlemsnr', 'medlemsnr.', 'medlems-nr', 'nr'],
     active: ['aktiv', 'status'],
     leader: ['skyteleder', 'kan være skyteleder', 'godkjent skyteleder'],
   },
 
-  MEMBER_HEADERS: ['Navn', 'Medlemsnr', 'Aktiv', 'Skyteleder'],
+  MEMBER_HEADERS: ['Fornavn', 'Etternavn', 'Medlemsnummer', 'Skyteleder'],
   SESSION_HEADERS: ['Dato', 'Skyteleder', 'Satt kl.', 'Endret kl.'],
-  REGISTRATION_HEADERS: ['Tidspunkt', 'Dato', 'Navn', 'Type', 'Invitert av', 'Skyteleder'],
+  REGISTRATION_HEADERS: ['Tidspunkt', 'Dato', 'Navn', 'Type', 'Invitert av', 'Skyteleder', 'Medlemsnummer'],
 
   MAX_GUEST_NAME_LENGTH: 80,
 };
@@ -148,8 +149,10 @@ function register(p) {
     });
     if (already) return { status: 'already', name: name, leader: session.name };
 
-    ensureSheet_(ss, CONFIG.SHEET_REGISTRATIONS, CONFIG.REGISTRATION_HEADERS)
-      .appendRow([now, today, name, type, invitedBy, session.name]);
+    const regSheet = ensureSheet_(ss, CONFIG.SHEET_REGISTRATIONS, CONFIG.REGISTRATION_HEADERS);
+    ensureHeaders_(regSheet, CONFIG.REGISTRATION_HEADERS);
+    const member = type === 'Medlem' ? members.find(function (m) { return m.name === name; }) : null;
+    regSheet.appendRow([now, today, name, type, invitedBy, session.name, member ? member.memberNo : '']);
 
     return { status: 'ok', name: name, time: time, leader: session.name };
   } finally {
@@ -168,13 +171,13 @@ function setup() {
   if (!members) {
     const sh = ensureSheet_(ss, CONFIG.SHEET_MEMBERS, CONFIG.MEMBER_HEADERS);
     sh.getRange(2, 1, 3, 4).setValues([
-      ['Kari Nordmann', '1001', 'Ja', 'Ja'],
-      ['Ola Nordmann', '1002', 'Ja', 'Nei'],
-      ['Eksempel Medlem', '1003', 'Ja', 'Nei'],
+      ['Kari', 'Nordmann', '1001', 'Ja'],
+      ['Ola', 'Nordmann', '1002', ''],
+      ['Eksempel', 'Medlem', '1003', ''],
     ]);
   }
   ensureSheet_(ss, CONFIG.SHEET_SESSIONS, CONFIG.SESSION_HEADERS);
-  ensureSheet_(ss, CONFIG.SHEET_REGISTRATIONS, CONFIG.REGISTRATION_HEADERS);
+  ensureHeaders_(ensureSheet_(ss, CONFIG.SHEET_REGISTRATIONS, CONFIG.REGISTRATION_HEADERS), CONFIG.REGISTRATION_HEADERS);
   return 'Ferdig. Fanene ' + [CONFIG.SHEET_MEMBERS, CONFIG.SHEET_SESSIONS, CONFIG.SHEET_REGISTRATIONS].join(', ') + ' finnes.';
 }
 
@@ -254,6 +257,15 @@ function ensureSheet_(ss, name, headers) {
   return sh;
 }
 
+/** Legger til manglende overskrifter (nye kolonner) i et eksisterende ark uten å flytte data. */
+function ensureHeaders_(sh, headers) {
+  const width = Math.max(sh.getLastColumn(), 1);
+  const current = sh.getRange(1, 1, 1, width).getValues()[0].map(function (h) { return String(h).trim(); });
+  headers.forEach(function (h, i) {
+    if (!current[i]) sh.getRange(1, i + 1).setValue(h).setFontWeight('bold');
+  });
+}
+
 function readMembers_(ss) {
   const sh = ss.getSheetByName(CONFIG.SHEET_MEMBERS);
   if (!sh) throw new Error('Fant ikke fanen «' + CONFIG.SHEET_MEMBERS + '». Kjør setup() først.');
@@ -265,19 +277,31 @@ function readMembers_(ss) {
     throw new Error('Fant ingen navnekolonne i fanen «' + CONFIG.SHEET_MEMBERS + '».');
   }
 
-  const seen = new Set();
-  const out = [];
+  const rows = [];
   values.slice(1).forEach(function (row) {
     const name = clean_(col.name >= 0
       ? row[col.name]
       : [row[col.firstName], col.lastName >= 0 ? row[col.lastName] : ''].join(' '));
-    if (!name || seen.has(name)) return;
-    seen.add(name);
-    out.push({
+    if (!name) return;
+    rows.push({
       name: name,
+      memberNo: col.memberNo >= 0 ? clean_(row[col.memberNo]) : '',
       active: col.active < 0 ? true : !isNo_(row[col.active]),
+      // Tom celle i Skyteleder-kolonnen = ikke skyteleder. Mangler kolonnen, kan alle velges.
       leader: col.leader < 0 ? true : isYes_(row[col.leader]),
     });
+  });
+
+  // To medlemmer med samme navn skilles med medlemsnummeret, f.eks. «Ola Nordmann (1002)».
+  const count = {};
+  rows.forEach(function (m) { count[m.name] = (count[m.name] || 0) + 1; });
+  const seen = new Set();
+  const out = [];
+  rows.forEach(function (m, i) {
+    if (count[m.name] > 1) m.name = m.name + ' (' + (m.memberNo || 'rad ' + (i + 2)) + ')';
+    if (seen.has(m.name)) return;
+    seen.add(m.name);
+    out.push(m);
   });
   return out;
 }

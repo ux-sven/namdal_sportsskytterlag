@@ -50,9 +50,9 @@ apps-script/
 
 | Fane | Kolonner | Innhold |
 |---|---|---|
-| **Medlemmer** | `Navn` (eller `Fornavn` + `Etternavn`), `Medlemsnr`, `Aktiv`, `Skyteleder` | Medlemslisten. `Aktiv = Nei` skjuler medlemmet. `Skyteleder = Ja` gjør at personen kan velges som skyteleder. Mangler kolonnen, kan alle aktive velges. |
+| **Medlemmer** | `Fornavn`, `Etternavn`, `Medlemsnummer`, `Skyteleder` (samme format som klubbens Excel-liste). `Navn` i én kolonne og `Aktiv` støttes også. | Medlemslisten. `Skyteleder = Ja` gjør at personen kan velges som skyteleder – tom celle betyr nei. To medlemmer med samme navn vises med medlemsnummer, f.eks. «Ola Nordmann (1002)». `Aktiv = Nei` (valgfri kolonne) skjuler medlemmet. |
 | **Økter** | `Dato`, `Skyteleder`, `Satt kl.`, `Endret kl.` | Én rad per treningsdag. Skrives automatisk. |
-| **Registreringer** | `Tidspunkt`, `Dato`, `Navn`, `Type`, `Invitert av`, `Skyteleder` | Én rad per registrering. Skrives automatisk. |
+| **Registreringer** | `Tidspunkt`, `Dato`, `Navn`, `Type`, `Invitert av`, `Skyteleder`, `Medlemsnummer` | Én rad per registrering. Skrives automatisk. |
 
 Kolonnenavnene som gjenkjennes kan justeres i `CONFIG.COLUMNS` øverst i `Code.gs`.
 
@@ -102,5 +102,4 @@ Vurder å slette gamle rader i `Registreringer` når de ikke lenger trengs.
 
 ### Kjente begrensninger
 
-- To medlemmer med nøyaktig samme navn kan ikke skilles fra hverandre i listen.
 - Web-appen krever nettforbindelse ved standplass.
