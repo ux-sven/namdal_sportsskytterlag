@@ -1,49 +1,52 @@
 @import './tokens.css';
 
 /*
- * Designet bygger på referansen «Fishing and Hunting Club Landing Page» (Dribbble),
- * men ALLE farger kommer fra Figma-variablene i tokens.css.
- * Semantiske navn under peker bare på --p-* (Primitives) og --t-* (Token Colors).
- * «npm run check:tokens» stopper byggingen hvis en farge er hardkodet.
+ * Designet bygger på referansen «Fishing and Hunting Club Landing Page» (Dribbble).
+ * ALLE farger kommer fra Namsos kommunes grafiske profil (tokens.css, --n-*).
+ * Semantiske navn under peker bare på --n-*; gjennomsiktighet og hover lages med color-mix()
+ * av de samme fargene. «npm run check:tokens» stopper byggingen hvis en farge er hardkodet.
  */
 :root {
   /* Flater */
-  --paper: var(--t-surface-tag-neutral-subtle);          /* Token Colors/surface/tag/neutral-subtle */
-  --paper-deep: var(--t-surface-interactive-hover);      /* Token Colors/surface/interactive/hover */
-  --paper-grain: var(--t-surface-tag-neutral-light);     /* Token Colors/surface/tag/neutral-light */
-  --card: var(--t-surface-surface-primary);              /* Token Colors/surface/surface-primary */
-  --forest: var(--p-color-tag-success-light-dark);       /* Primitives/color/tag/success/light-dark */
-  --night: var(--p-color-grey-black);                    /* Primitives/color/grey/black */
-  --night-soft: var(--p-color-grey-950);                 /* Primitives/color/grey/950 */
+  --paper: var(--n-stotte-lys-gra-flate);                 /* lys grå flate */
+  --paper-deep: var(--n-stotte-lys-gra);                  /* lys grå */
+  --paper-grain: var(--n-stotte-lys-gra);
+  --card: var(--n-primaer-hvit);                          /* hvit */
+  --forest: var(--n-primaer-namsosgronn);                 /* Namsosgrønn – profilens primærfarge */
+  --night: var(--n-stotte-sort);                          /* sort */
+  --night-soft: var(--n-stotte-industrigra);              /* industrigrå */
 
   /* Tekst */
-  --ink: var(--p-color-grey-950);                        /* Primitives/color/grey/950 */
-  --ink-soft: var(--p-color-grey-700);                   /* Primitives/color/grey/700 */
-  --ink-invert: var(--t-text-text-invert);               /* Token Colors/text/text-invert */
-  --ink-invert-soft: var(--p-color-grey-150);            /* Primitives/color/grey/150 */
-  --ink-invert-muted: var(--p-color-grey-300);           /* Primitives/color/grey/300 */
-  --link: var(--t-text-tag-warning);                     /* Token Colors/text/tag/warning */
-  --link-hover: var(--t-attention-warning);              /* Token Colors/attention/warning */
+  --ink: var(--n-stotte-sort);
+  --ink-soft: var(--n-stotte-industrigra);
+  --ink-invert: var(--n-primaer-hvit);
+  --ink-invert-soft: color-mix(in srgb, var(--n-primaer-hvit) 88%, transparent);
+  --ink-invert-muted: color-mix(in srgb, var(--n-primaer-hvit) 72%, transparent);
+  --link: var(--n-sekundaer-fjordbla);                    /* fjordblå – lenker */
+  --link-hover: var(--n-primaer-namsosgronn);
 
-  /* Aksent (knapper, nåler, markeringer) */
-  --accent: var(--p-ultimate-colors-attention-warning-400);       /* Primitives/ultimate colors/attention/warning/400 */
-  --accent-hover: var(--p-ultimate-colors-attention-warning-300); /* Primitives/ultimate colors/attention/warning/300 */
-  --on-accent: var(--p-color-grey-950);
+  /* Aksent: Namsosgrønn på knapper, korngul (sparsomt) på merkelapper og nåler */
+  --accent: var(--n-primaer-namsosgronn);
+  --accent-hover: color-mix(in srgb, var(--n-primaer-namsosgronn) 82%, var(--n-stotte-sort));
+  --on-accent: var(--n-primaer-hvit);
+  --highlight: var(--n-sekundaer-korngul);
+  --on-highlight: var(--n-stotte-sort);
+  --leaf: var(--n-sekundaer-lovgronn);                    /* løvgrønn – valgt rad, rolige flater */
 
   /* Linjer, glass og skygger */
-  --line: var(--t-surface-tag-neutral-light);
-  --line-strong: var(--p-color-grey-300);
-  --glass: var(--p-color-overlay-scrim-dark);            /* Primitives/color/overlay/scrim-dark */
-  --glass-line: var(--p-color-shade-transparent-light-medium);
-  --glass-hover: var(--p-color-shade-transparent-light-medium);
-  --scrim: var(--t-surface-overlay-scrim);               /* Token Colors/surface/overlay/scrim */
-  --scrim-strong: var(--p-color-overlay-scrim-dark);
-  --shadow-color: var(--t-shade-secondary);              /* Token Colors/shade-secondary */
-  --focus: var(--t-border-border-focus);                 /* Token Colors/border/border-focus */
-  --error: var(--t-text-tag-error);
-  --error-surface: var(--t-surface-surface-attention-error);
-  --success: var(--t-text-tag-success);
-  --success-surface: var(--t-surface-surface-attention-success);
+  --line: var(--n-stotte-lys-gra);
+  --line-strong: color-mix(in srgb, var(--n-stotte-industrigra) 45%, var(--n-primaer-hvit));
+  --glass: color-mix(in srgb, var(--n-stotte-sort) 74%, transparent);
+  --glass-line: color-mix(in srgb, var(--n-primaer-hvit) 18%, transparent);
+  --glass-hover: color-mix(in srgb, var(--n-primaer-hvit) 14%, transparent);
+  --scrim: color-mix(in srgb, var(--n-stotte-sort) 45%, transparent);
+  --scrim-strong: color-mix(in srgb, var(--n-stotte-sort) 78%, transparent);
+  --shadow-color: color-mix(in srgb, var(--n-stotte-sort) 16%, transparent);
+  --focus: var(--n-sekundaer-fjordbla);
+  --error: color-mix(in srgb, var(--n-sekundaer-korngul) 35%, var(--n-stotte-sort));
+  --error-surface: color-mix(in srgb, var(--n-sekundaer-korngul) 18%, var(--n-primaer-hvit));
+  --success: var(--n-primaer-namsosgronn);
+  --success-surface: var(--n-sekundaer-lovgronn);
 
   --radius-s: 6px;
   --radius-l: 14px;
@@ -51,8 +54,10 @@
   --pill: 999px;
   --shadow: 0 10px 30px var(--shadow-color);
   --shadow-s: 0 2px 10px var(--shadow-color);
-  --font-head: "PT Serif", Georgia, serif;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Profilens skrifter: Ubuntu (titler), Open Sans (brødtekst), PT Serif (aksent) */
+  --font-head: "PT Serif", Palatino, Georgia, serif;
+  --font-display: "Ubuntu", Arial, sans-serif;
+  --font-body: "Open Sans", Arial, sans-serif;
   --wrap: 1240px;
   --gutter: clamp(16px, 4vw, 40px);
 
@@ -76,7 +81,7 @@ img { max-width: 100%; height: auto; display: block; }
 a { color: var(--link); text-underline-offset: 3px; }
 a:hover { color: var(--link-hover); }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
-h1, h2, h3 { font-family: var(--font-body); font-weight: 500; letter-spacing: -.02em; line-height: 1.12; margin: 0 0 .5em; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 500; letter-spacing: -.015em; line-height: 1.12; margin: 0 0 .5em; }
 h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
 h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
 h3 { font-size: 1.3rem; letter-spacing: -.01em; }
@@ -155,7 +160,7 @@ a.card:hover .card-media img { transform: scale(1.04); }
 .card-body { padding: 0 10px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .card-body h3 { font-size: 1.15rem; margin: 0; }
 .card-meta { font-size: .85rem; color: var(--ink-soft); }
-.tag { display: inline-flex; align-items: center; font-size: .78rem; font-weight: 600; color: var(--on-accent); background: var(--accent); border-radius: var(--pill); padding: 2px 10px; align-self: flex-start; }
+.tag { display: inline-flex; align-items: center; font-size: .78rem; font-weight: 600; color: var(--on-highlight); background: var(--highlight); border-radius: var(--pill); padding: 2px 10px; align-self: flex-start; }
 
 /* Undersider: foto-topp med revnet kant */
 .page-hero {
@@ -181,7 +186,7 @@ a.card:hover .card-media img { transform: scale(1.04); }
 .prose li { margin: .3em 0; }
 .prose li::marker { color: var(--link); }
 .prose li > p { margin: 0; }
-.prose blockquote { margin: 1.5em 0; padding: .5em 1.2em; border-left: 4px solid var(--accent); color: var(--ink-soft); }
+.prose blockquote { margin: 1.5em 0; padding: .5em 1.2em; border-left: 4px solid var(--forest); color: var(--ink-soft); }
 .prose table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: .95rem; }
 .prose th, .prose td { border-bottom: 1px solid var(--line); padding: 10px 8px; text-align: left; }
 .prose iframe { width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: var(--radius-l); }

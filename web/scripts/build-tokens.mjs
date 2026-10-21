@@ -1,21 +1,20 @@
 /**
- * Lager src/styles/tokens.css fra src/styles/figma-tokens.json
- * (fargevariablene eksportert fra Figma-fila «Medlemsregister»).
+ * Lager src/styles/tokens.css fra src/styles/namsos-tokens.json
+ * (fargene i Namsos kommunes grafiske profil).
  *
- *   Primitives/color/grey/paper         → --p-color-grey-paper
- *   Token Colors/surface/surface-primary → --t-surface-surface-primary: var(--p-ultimate-colors-white-white)
+ *   Namsos/primær/namsosgronn → --n-primaer-namsosgronn
  *
- * Tokens som er alias i Figma peker på primitive-variabelen, slik at strukturen fra Figma bevares.
+ * Fila støtter også alias ("alias": "Namsos/…"), som blir var(--…).
  */
 import fs from 'node:fs/promises';
 
-const SRC = 'src/styles/figma-tokens.json';
+const SRC = process.env.TOKENS || 'src/styles/namsos-tokens.json';
 const OUT = 'src/styles/tokens.css';
 
 export function cssVar(figmaName) {
   const [collection, ...rest] = figmaName.split('/');
-  const prefix = collection === 'Primitives' ? 'p' : collection === 'Token Colors' ? 't' : collection.toLowerCase().replace(/\s+/g, '-');
-  const slug = rest.join('-').toLowerCase().replace(/%/g, 'pct').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const prefix = { Namsos: 'n', Primitives: 'p', 'Token Colors': 't' }[collection] || collection.toLowerCase().replace(/\s+/g, '-');
+  const slug = rest.join('-').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/å/g, 'a').replace(/%/g, 'pct').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   return `--${prefix}-${slug}`;
 }
 
@@ -29,6 +28,6 @@ const lines = Object.entries(colors)
 
 await fs.writeFile(
   OUT,
-  `/* GENERERT – ikke rediger. Kilde: ${source}, eksportert ${exported}.\n   Oppdater figma-tokens.json og kjør «npm run tokens». */\n:root {\n${lines.join('\n')}\n}\n`
+  `/* GENERERT – ikke rediger. Kilde: ${source}, eksportert ${exported}.\n   Oppdater namsos-tokens.json og kjør «npm run tokens». */\n:root {\n${lines.join('\n')}\n}\n`
 );
 console.log(`tokens.css: ${lines.length} fargevariabler`);

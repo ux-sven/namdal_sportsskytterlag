@@ -25,11 +25,16 @@ WordPress (redigering)  ──REST API──▶  GitHub Actions (npm run build) 
 - Layouten er inspirert av referansen «Fishing and Hunting Club Landing Page» (Dribbble): flytende
   pille-meny, stor fotohero med revnet kant, papirtekstur, skrå fotokort, skog-seksjon med nålede
   polaroider og kursiv serif-aksent i overskriftene.
-- **Alle farger kommer fra Figma-variablene** i fila Medlemsregister. `src/styles/figma-tokens.json`
-  er eksporten, `npm run tokens` lager `src/styles/tokens.css` (`--p-…` = Primitives, `--t-…` = Token Colors),
-  og `src/styles/global.css` gir dem semantiske navn (f.eks. `--paper: var(--t-surface-tag-neutral-subtle)`).
+- **Alle farger kommer fra Namsos kommunes grafiske profil:** Namsosgrønn og hvit (primær), lys grå,
+  industrigrå og sort (støtte), og løvgrønn, korngul og fjordblå (sekundær, brukes sparsomt).
+  `src/styles/namsos-tokens.json` er kilden, `npm run tokens` lager `src/styles/tokens.css` (`--n-…`),
+  og `src/styles/global.css` gir dem semantiske navn (f.eks. `--accent: var(--n-primaer-namsosgronn)`).
+  Gjennomsiktighet og hover lages med `color-mix()` av de samme fargene.
+- Skriftene følger profilen: Ubuntu (titler), Open Sans (brødtekst) og PT Serif (kursiv aksent).
 - `npm run check:tokens` (kjøres i hver bygging) stopper byggingen hvis en farge er hardkodet et sted i `src/`.
-- Endrer dere farger i Figma: eksporter variablene til `figma-tokens.json` på nytt og kjør `npm run tokens`.
+- Fargeverdiene er hentet fra namsos.kommune.no, ikke fra profilhåndboken. Bekreft dem mot håndboken
+  (kommunikasjon@namsos.kommune.no) og oppdater `namsos-tokens.json` ved behov.
+- Kommunens logo, kommunevåpen og visjonsmerke brukes ikke – nettsiden har klubben som avsender.
 
 ## Oppmøteregistrering
 

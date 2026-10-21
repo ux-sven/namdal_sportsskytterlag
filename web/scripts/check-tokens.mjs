@@ -1,6 +1,6 @@
 /**
  * Stopper byggingen hvis noen farge er hardkodet utenfor tokens.css.
- * Alle farger skal komme fra Figma-variablene (var(--p-…) / var(--t-…)).
+ * Alle farger skal komme fra Namsos kommunes fargepalett (var(--n-…) i tokens.css).
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -36,7 +36,7 @@ for await (const file of files(ROOT)) {
 }
 
 if (problems.length) {
-  console.error(`Fant ${problems.length} farge(r) som ikke kommer fra Figma-tokens:\n` + problems.join('\n'));
+  console.error(`Fant ${problems.length} farge(r) som ikke kommer fra fargepaletten (tokens.css):\n` + problems.join('\n'));
   process.exit(1);
 }
-console.log('Fargesjekk OK – alle farger kommer fra Figma-tokens.');
+console.log('Fargesjekk OK – alle farger kommer fra Namsos-paletten (tokens.css).');
