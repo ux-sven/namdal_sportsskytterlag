@@ -20,6 +20,24 @@ WordPress (redigering)  ──REST API──▶  GitHub Actions (npm run build) 
   Nyheter og sider kommer fra WordPress.
 - Hvis WordPress er utilgjengelig under byggingen, brukes innholdet fra forrige henting (lokalt).
 
+## Design og farger
+
+- Layouten er inspirert av referansen «Fishing and Hunting Club Landing Page» (Dribbble): flytende
+  pille-meny, stor fotohero med revnet kant, papirtekstur, skrå fotokort, skog-seksjon med nålede
+  polaroider og kursiv serif-aksent i overskriftene.
+- **Alle farger kommer fra Figma-variablene** i fila Medlemsregister. `src/styles/figma-tokens.json`
+  er eksporten, `npm run tokens` lager `src/styles/tokens.css` (`--p-…` = Primitives, `--t-…` = Token Colors),
+  og `src/styles/global.css` gir dem semantiske navn (f.eks. `--paper: var(--t-surface-tag-neutral-subtle)`).
+- `npm run check:tokens` (kjøres i hver bygging) stopper byggingen hvis en farge er hardkodet et sted i `src/`.
+- Endrer dere farger i Figma: eksporter variablene til `figma-tokens.json` på nytt og kjør `npm run tokens`.
+
+## Oppmøteregistrering
+
+Siden `/oppmoteregistrering/` er bygget inn i nettsiden (`src/pages/oppmoteregistrering.astro` og
+`src/scripts/registration.js`). Den leser medlemslisten og lagrer registreringer i Google-regnearket
+via Apps Script-API-et (`../apps-script/Code.gs`, `doPost`). Uten `PUBLIC_REGISTRATION_URL` kjører den
+med testdata (merket «Demo»). Legg til `?state=husket` i adressen for å se tilstanden med husket skyteleder.
+
 ## Utvikle lokalt
 
 ```bash
@@ -35,7 +53,7 @@ npm run dev       # http://localhost:4321
 2. **Push til `main`.** Workflowen `.github/workflows/deploy-web.yml` bygger og publiserer siden til
    `https://ux-sven.github.io/namdal_sportsskytterlag/`. Den kan også startes manuelt under *Actions*.
 3. **(Valgfritt) Variabler** under *Settings → Secrets and variables → Actions → Variables*:
-   - `PUBLIC_REGISTRATION_URL` – adressen til den publiserte Apps Script-appen (oppmøteregistrering).
+   - `PUBLIC_REGISTRATION_URL` – adressen til den publiserte Apps Script-web-appen (slutter på `/exec`).
    - `WP_URL` – hvis WordPress flyttes, f.eks. `https://cms.namdalssl.no`.
 
 ## Automatisk oppdatering fra WordPress

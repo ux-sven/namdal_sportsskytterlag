@@ -15,9 +15,18 @@ Designet følger Figma-fila [Medlemsregister](https://www.figma.com/design/YdgLl
 
 ## Oppmøteregistrering
 
-En **Google Apps Script web-app**. Medlemslisten ligger i et Google-regneark i klubbens Drive
-(konvertert fra Excel), og registreringene skrives tilbake til samme regneark.
-Appen bygges inn på nettsiden under `/oppmoteregistrering/`.
+Selve skjemaet er en del av nettsiden (`web/src/pages/oppmoteregistrering.astro`).
+Medlemslisten ligger i et Google-regneark i klubbens Drive (konvertert fra Excel), og
+**Google Apps Script** fungerer som et lite API mot regnearket:
+
+```
+namdalssl.no/oppmoteregistrering/  ──POST {action:'init'|'register'}──▶  Apps Script (doPost)  ──▶  Google Sheets
+```
+
+Hvorfor ikke bare legge medlemslisten i nettsiden? GitHub Pages er statiske filer som alle kan laste ned.
+Medlemslisten (personopplysninger) og skrivingen av registreringer må derfor gå via en tjeneste med tilgang
+til regnearket – det er Apps Script. Apps Script-appen har også en egen side (`doGet`) som kan brukes
+direkte på nettbrettet som reserve.
 
 ### Funksjoner
 
@@ -61,8 +70,8 @@ Kolonnenavnene som gjenkjennes kan justeres i `CONFIG.COLUMNS` øverst i `Code.g
    Nettbrettet husker koden etter første innlogging.
 5. **Publiser:** *Distribuer → Ny distribusjon → Web-app*. «Kjør som: meg», «Hvem har tilgang: Alle».
    Åpne lenken på nettbrettet og legg den til på startskjermen.
-6. **Bygg den inn på nettsiden:** legg web-app-adressen inn som GitHub-variabelen `PUBLIC_REGISTRATION_URL`
-   (se [web/README.md](web/README.md)).
+6. **Koble den til nettsiden:** legg web-app-adressen (slutter på `/exec`) inn som GitHub-variabelen
+   `PUBLIC_REGISTRATION_URL` (se [web/README.md](web/README.md)) og kjør publiseringen på nytt.
 
 Etter endringer i koden: *Distribuer → Administrer distribusjoner → Rediger → Ny versjon*, så beholdes lenken.
 

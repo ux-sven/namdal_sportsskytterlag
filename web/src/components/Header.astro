@@ -6,15 +6,11 @@ const isActive = (item) =>
   [item.href, ...(item.children || []).map((c) => c.href)].some((h) => current === url(h));
 ---
 <header class="site-header">
-  <div class="wrap bar">
+  <div class="pill">
     <a class="brand" href={url('/')} aria-label={`${site.name} – forsiden`}>
-      <Logo size={40} />
-      <span class="brand-text">Namdal <span>Sportsskytterlag</span></span>
+      <Logo size={34} />
+      <span class="brand-text">NSSL<span class="brand-long"> · Namdal Sportsskytterlag</span></span>
     </a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <span class="sr-only">Meny</span>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="l1" d="M4 7h16"/><path class="l2" d="M4 12h16"/><path class="l3" d="M4 17h16"/></svg>
-    </button>
     <nav id="site-nav" class="nav" aria-label="Hovedmeny">
       <ul>
         {nav.map((item) => (
@@ -23,7 +19,7 @@ const isActive = (item) =>
               <>
                 <button type="button" class:list={['nav-link', { active: isActive(item) }]} aria-expanded="false">
                   {item.label}
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
                 <ul class="sub">
                   {item.children.map((c) => (
@@ -37,47 +33,58 @@ const isActive = (item) =>
           </li>
         ))}
       </ul>
-      <a class="btn nav-cta" href={url('/oppmoteregistrering/')}>Oppmøteregistrering</a>
     </nav>
+    <a class="btn nav-cta" href={url('/oppmoteregistrering/')}>Registrer oppmøte</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="sr-only">Meny</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </div>
 </header>
 
 <style>
-  .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.94); backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--border); }
-  .bar { display: flex; align-items: center; gap: 24px; min-height: 72px; }
-  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); margin-right: auto; }
-  .brand-text { font-family: var(--font-head); font-size: 1.25rem; line-height: 1.1; }
-  .nav { display: flex; align-items: center; gap: 16px; }
-  .nav > ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; }
+  .site-header { position: fixed; top: 16px; left: 0; right: 0; z-index: 50; display: flex; justify-content: center; padding: 0 var(--gutter); pointer-events: none; }
+  .pill {
+    pointer-events: auto; display: flex; align-items: center; gap: 8px; width: 100%; max-width: 1080px;
+    padding: 6px 6px 6px 8px; border-radius: var(--pill); background: var(--glass); border: 1px solid var(--glass-line);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3); color: var(--ink-invert);
+    box-shadow: var(--shadow);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink-invert); margin-right: auto; padding-right: 8px; }
+  .brand-text { font-family: var(--font-head); font-size: 1.15rem; white-space: nowrap; }
+  .brand-long { font-family: var(--font-body); font-size: .85rem; color: var(--ink-invert-muted); }
+  .nav > ul { list-style: none; display: flex; gap: 2px; margin: 0; padding: 0; }
   .nav li { position: relative; }
-  .nav-link { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 12px; border: 0; background: none; border-radius: var(--radius-s); color: var(--text-primary); text-decoration: none; font: inherit; font-size: .98rem; font-weight: 500; cursor: pointer; }
-  .nav-link:hover, .nav-link.active { color: var(--text-brand); background: var(--surface-brand-light); }
-  .sub { list-style: none; margin: 0; padding: 8px; position: absolute; top: calc(100% + 4px); left: 0; min-width: 240px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-l); box-shadow: var(--shadow); display: none; }
-  .sub a { display: block; padding: 10px 12px; border-radius: var(--radius-s); color: var(--text-primary); text-decoration: none; }
-  .sub a:hover, .sub a[aria-current] { background: var(--surface-brand-light); color: var(--text-brand); }
+  .nav-link { display: inline-flex; align-items: center; gap: 4px; min-height: 42px; padding: 0 14px; border: 0; background: none; border-radius: var(--pill); color: var(--ink-invert-soft); text-decoration: none; font: inherit; font-size: .95rem; cursor: pointer; }
+  .nav-link:hover { color: var(--ink-invert); background: var(--glass-hover); }
+  .nav-link.active { color: var(--accent); }
+  .sub { list-style: none; margin: 0; padding: 8px; position: absolute; top: calc(100% + 10px); left: 0; min-width: 250px; background: var(--night-soft); border: 1px solid var(--glass-line); border-radius: var(--radius-l); box-shadow: var(--shadow); display: none; }
+  .sub a { display: block; padding: 10px 12px; border-radius: var(--radius-s); color: var(--ink-invert-soft); text-decoration: none; }
+  .sub a:hover, .sub a[aria-current] { background: var(--glass-hover); color: var(--accent); }
   .has-sub:hover .sub, .has-sub:focus-within .sub, .has-sub.open .sub { display: block; }
-  .has-sub::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 8px; }
-  .nav-cta { min-height: 44px; font-size: .95rem; }
-  .menu-toggle { display: none; width: 44px; height: 44px; border: 0; background: none; border-radius: var(--radius-s); color: var(--text-primary); cursor: pointer; }
-  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .has-sub::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 12px; }
+  .nav-cta { min-height: 42px; padding: 0 18px; font-size: .95rem; }
+  .menu-toggle { display: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--glass-hover); color: var(--ink-invert); cursor: pointer; }
 
-  @media (max-width: 1080px) {
+  @media (max-width: 1100px) { .brand-long { display: none; } }
+  @media (max-width: 960px) {
     .menu-toggle { display: grid; place-items: center; }
-    .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 8px; padding: 12px var(--gutter) 24px; background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow); max-height: calc(100vh - 72px); overflow-y: auto; }
-    .nav.open { display: flex; }
+    .pill { flex-wrap: wrap; border-radius: 28px; }
+    .nav { display: none; order: 10; width: 100%; padding: 8px 4px 12px; max-height: calc(100vh - 120px); overflow-y: auto; }
+    .nav.open { display: block; }
     .nav > ul { flex-direction: column; }
-    .nav-link { width: 100%; justify-content: space-between; min-height: 48px; font-size: 1.05rem; }
-    .sub { position: static; box-shadow: none; border: 0; padding: 0 0 8px 12px; min-width: 0; }
+    .nav-link { width: 100%; justify-content: space-between; min-height: 48px; font-size: 1.05rem; border-radius: var(--radius-s); }
+    .sub { position: static; box-shadow: none; border: 0; background: none; padding: 0 0 8px 12px; min-width: 0; }
     .has-sub:hover .sub, .has-sub:focus-within .sub { display: none; }
     .has-sub.open .sub { display: block; }
-    .nav-cta { min-height: 52px; }
   }
-  @media (max-width: 420px) { .brand-text span { display: block; } }
+  @media (max-width: 520px) { .nav-cta { display: none; } .nav.open + .nav-cta { display: inline-flex; } }
 </style>
 
 <script>
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.getElementById('site-nav');
+  const closeSubs = () => document.querySelectorAll('.has-sub.open').forEach((o) => { o.classList.remove('open'); o.firstElementChild.setAttribute('aria-expanded', 'false'); });
   toggle?.addEventListener('click', () => {
     const open = nav.classList.toggle('open');
     toggle.setAttribute('aria-expanded', String(open));
@@ -86,16 +93,11 @@ const isActive = (item) =>
     btn.addEventListener('click', () => {
       const li = btn.parentElement;
       const open = !li.classList.contains('open');
-      document.querySelectorAll('.has-sub.open').forEach((o) => { o.classList.remove('open'); o.firstElementChild.setAttribute('aria-expanded', 'false'); });
+      closeSubs();
       li.classList.toggle('open', open);
       btn.setAttribute('aria-expanded', String(open));
     });
   });
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    document.querySelectorAll('.has-sub.open').forEach((o) => { o.classList.remove('open'); o.firstElementChild.setAttribute('aria-expanded', 'false'); });
-  });
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.has-sub')) document.querySelectorAll('.has-sub.open').forEach((o) => { o.classList.remove('open'); o.firstElementChild.setAttribute('aria-expanded', 'false'); });
-  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSubs(); });
+  document.addEventListener('click', (e) => { if (!e.target.closest('.has-sub')) closeSubs(); });
 </script>

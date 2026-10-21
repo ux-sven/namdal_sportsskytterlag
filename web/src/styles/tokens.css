@@ -1,0 +1,303 @@
+/* GENERERT – ikke rediger. Kilde: Figma: Medlemsregister (YdgLlyP99S3HhM5W4iX2zc) – lokale fargevariabler, modus Light, eksportert 2026-10-21.
+   Oppdater figma-tokens.json og kjør «npm run tokens». */
+:root {
+  --p-color-attention-success: #1a873d; /* Primitives/color/attention/success */
+  --p-color-attention-warning: #df6321; /* Primitives/color/attention/warning */
+  --p-color-attention-error: #c7181f; /* Primitives/color/attention/error */
+  --p-color-grey-white-100: #ffffff; /* Primitives/color/grey/white-100 */
+  --p-color-attention-info: #0072e3; /* Primitives/color/attention/info */
+  --p-color-grey-paper: #fffcf0; /* Primitives/color/grey/paper */
+  --p-color-grey-50: #f2f0e5; /* Primitives/color/grey/50 */
+  --p-color-grey-100: #e6e4d9; /* Primitives/color/grey/100 */
+  --p-color-grey-150: #dad8ce; /* Primitives/color/grey/150 */
+  --p-color-grey-300: #b7b5ac; /* Primitives/color/grey/300 */
+  --p-color-grey-400: #afafaf; /* Primitives/color/grey/400 */
+  --p-color-grey-500: #878580; /* Primitives/color/grey/500 */
+  --p-color-grey-600: #6f6e69; /* Primitives/color/grey/600 */
+  --p-color-grey-700: #575653; /* Primitives/color/grey/700 */
+  --p-color-grey-800: #403e3c; /* Primitives/color/grey/800 */
+  --p-color-grey-850: #343331; /* Primitives/color/grey/850 */
+  --p-color-grey-900: #282726; /* Primitives/color/grey/900 */
+  --p-color-grey-950: #1c1b1a; /* Primitives/color/grey/950 */
+  --p-color-grey-black: #100f0f; /* Primitives/color/grey/black */
+  --p-color-grey-black-100pct: #000000; /* Primitives/color/grey/black 100% */
+  --p-color-brand-raisin-black: #212738; /* Primitives/color/brand/Raisin black */
+  --p-color-brand-bittersweer: #f97068; /* Primitives/color/brand/Bittersweer */
+  --p-color-brand-pear: #d1d646; /* Primitives/color/brand/Pear */
+  --p-color-brand-anti-flash-white: #edf2ef; /* Primitives/color/brand/Anti-flash white */
+  --p-color-brand-vivid-sky-blue: #57c4e5; /* Primitives/color/brand/Vivid sky blue */
+  --p-color-blue-10: #fafcfe; /* Primitives/color/blue/10 */
+  --p-color-blue-50: #ddeaf9; /* Primitives/color/blue/50 */
+  --p-color-blue-100: #c1d8f3; /* Primitives/color/blue/100 */
+  --p-color-blue-150: #96bdeb; /* Primitives/color/blue/150 */
+  --p-color-blue-300: #6ba3e3; /* Primitives/color/blue/300 */
+  --p-color-blue-400: #4188da; /* Primitives/color/blue/400 */
+  --p-color-blue-500: #2876d1; /* Primitives/color/blue/500 */
+  --p-color-blue-600: #2366b4; /* Primitives/color/blue/600 */
+  --p-color-blue-700: #1b4e89; /* Primitives/color/blue/700 */
+  --p-color-blue-800: #153e6d; /* Primitives/color/blue/800 */
+  --p-color-blue-850: #0d2642; /* Primitives/color/blue/850 */
+  --p-color-blue-900: #071526; /* Primitives/color/blue/900 */
+  --p-color-blue-950: #020509; /* Primitives/color/blue/950 */
+  --p-color-dark-tones-red: #af3029; /* Primitives/color/dark tones/red */
+  --p-color-dark-tones-orange: #bc5215; /* Primitives/color/dark tones/orange */
+  --p-color-dark-tones-yellow: #ad8301; /* Primitives/color/dark tones/yellow */
+  --p-color-dark-tones-green: #66800b; /* Primitives/color/dark tones/green */
+  --p-color-dark-tones-cyan: #24837b; /* Primitives/color/dark tones/cyan */
+  --p-color-dark-tones-blue: #205ea6; /* Primitives/color/dark tones/blue */
+  --p-color-dark-tones-purple: #5e409d; /* Primitives/color/dark tones/purple */
+  --p-color-dark-tones-magenta: #a02f6f; /* Primitives/color/dark tones/magenta */
+  --p-color-light-tones-red: #d14d41; /* Primitives/color/light tones/red */
+  --p-color-light-tones-orange: #da702c; /* Primitives/color/light tones/orange */
+  --p-color-light-tones-yellow: #d0a215; /* Primitives/color/light tones/yellow */
+  --p-color-light-tones-green: #879a39; /* Primitives/color/light tones/green */
+  --p-color-light-tones-cyan: #3aa99f; /* Primitives/color/light tones/cyan */
+  --p-color-light-tones-blue: #4385be; /* Primitives/color/light tones/blue */
+  --p-color-light-tones-purple: #8b7ec8; /* Primitives/color/light tones/purple */
+  --p-color-light-tones-magenta: #ce5d97; /* Primitives/color/light tones/magenta */
+  --p-color-shade-transparent-dark-strong: #0b0b0b40; /* Primitives/color/shade/transparent-dark-strong */
+  --p-color-shade-transparent-dark-medium: #0b0b0b2e; /* Primitives/color/shade/transparent-dark-medium */
+  --p-color-shade-transparent-light-strong: #ffffff40; /* Primitives/color/shade/transparent-light-strong */
+  --p-color-shade-transparent-light-medium: #ffffff2e; /* Primitives/color/shade/transparent-light-medium */
+  --p-ultimate-colors-attention-error-25: #fffbfa; /* Primitives/ultimate colors/attention/error/25 */
+  --p-ultimate-colors-attention-error-50: #fef3f2; /* Primitives/ultimate colors/attention/error/50 */
+  --p-ultimate-colors-attention-error-100: #fee4e2; /* Primitives/ultimate colors/attention/error/100 */
+  --p-ultimate-colors-attention-error-200: #fecdca; /* Primitives/ultimate colors/attention/error/200 */
+  --p-ultimate-colors-attention-error-300: #fda29b; /* Primitives/ultimate colors/attention/error/300 */
+  --p-ultimate-colors-attention-error-400: #f97066; /* Primitives/ultimate colors/attention/error/400 */
+  --p-ultimate-colors-attention-error-500: #f04438; /* Primitives/ultimate colors/attention/error/500 */
+  --p-ultimate-colors-attention-error-600: #d92d20; /* Primitives/ultimate colors/attention/error/600 */
+  --p-ultimate-colors-attention-error-700: #b42318; /* Primitives/ultimate colors/attention/error/700 */
+  --p-ultimate-colors-attention-error-800: #912018; /* Primitives/ultimate colors/attention/error/800 */
+  --p-ultimate-colors-attention-success-25: #f6fef9; /* Primitives/ultimate colors/attention/success/25 */
+  --p-ultimate-colors-attention-error-900: #7a271a; /* Primitives/ultimate colors/attention/error/900 */
+  --p-ultimate-colors-attention-success-50: #ecfdf3; /* Primitives/ultimate colors/attention/success/50 */
+  --p-ultimate-colors-attention-success-100: #d1fadf; /* Primitives/ultimate colors/attention/success/100 */
+  --p-ultimate-colors-attention-success-200: #a6f4c5; /* Primitives/ultimate colors/attention/success/200 */
+  --p-ultimate-colors-attention-success-300: #6ce9a6; /* Primitives/ultimate colors/attention/success/300 */
+  --p-ultimate-colors-attention-success-400: #32d583; /* Primitives/ultimate colors/attention/success/400 */
+  --p-ultimate-colors-attention-success-500: #12b76a; /* Primitives/ultimate colors/attention/success/500 */
+  --p-ultimate-colors-attention-success-600: #039855; /* Primitives/ultimate colors/attention/success/600 */
+  --p-ultimate-colors-attention-success-700: #027a48; /* Primitives/ultimate colors/attention/success/700 */
+  --p-ultimate-colors-attention-success-800: #05603a; /* Primitives/ultimate colors/attention/success/800 */
+  --p-ultimate-colors-attention-success-900: #054f31; /* Primitives/ultimate colors/attention/success/900 */
+  --p-ultimate-colors-attention-warning-25: #fffcf5; /* Primitives/ultimate colors/attention/warning/25 */
+  --p-ultimate-colors-attention-warning-50: #fffaeb; /* Primitives/ultimate colors/attention/warning/50 */
+  --p-ultimate-colors-attention-warning-100: #fef0c7; /* Primitives/ultimate colors/attention/warning/100 */
+  --p-ultimate-colors-attention-warning-200: #fedf89; /* Primitives/ultimate colors/attention/warning/200 */
+  --p-ultimate-colors-attention-warning-300: #fec84b; /* Primitives/ultimate colors/attention/warning/300 */
+  --p-ultimate-colors-attention-warning-400: #fdb022; /* Primitives/ultimate colors/attention/warning/400 */
+  --p-ultimate-colors-attention-warning-500: #f79009; /* Primitives/ultimate colors/attention/warning/500 */
+  --p-ultimate-colors-attention-warning-600: #dc6803; /* Primitives/ultimate colors/attention/warning/600 */
+  --p-ultimate-colors-attention-warning-700: #b54708; /* Primitives/ultimate colors/attention/warning/700 */
+  --p-ultimate-colors-attention-warning-800: #93370d; /* Primitives/ultimate colors/attention/warning/800 */
+  --p-ultimate-colors-blue-25: #f5faff; /* Primitives/ultimate colors/blue/25 */
+  --p-ultimate-colors-attention-warning-900: #7a2e0e; /* Primitives/ultimate colors/attention/warning/900 */
+  --p-ultimate-colors-blue-50: #eff8ff; /* Primitives/ultimate colors/blue/50 */
+  --p-ultimate-colors-blue-100: #d1e9ff; /* Primitives/ultimate colors/blue/100 */
+  --p-ultimate-colors-blue-200: #b2ddff; /* Primitives/ultimate colors/blue/200 */
+  --p-ultimate-colors-blue-300: #84caff; /* Primitives/ultimate colors/blue/300 */
+  --p-ultimate-colors-blue-400: #53b1fd; /* Primitives/ultimate colors/blue/400 */
+  --p-ultimate-colors-blue-500: #2e90fa; /* Primitives/ultimate colors/blue/500 */
+  --p-ultimate-colors-blue-600: #1570ef; /* Primitives/ultimate colors/blue/600 */
+  --p-ultimate-colors-blue-700: #175cd3; /* Primitives/ultimate colors/blue/700 */
+  --p-ultimate-colors-blue-800: #1849a9; /* Primitives/ultimate colors/blue/800 */
+  --p-ultimate-colors-blue-900: #194185; /* Primitives/ultimate colors/blue/900 */
+  --p-ultimate-colors-blue-gray-25: #fcfcfd; /* Primitives/ultimate colors/blue_gray/25 */
+  --p-ultimate-colors-blue-gray-50: #f8f9fc; /* Primitives/ultimate colors/blue_gray/50 */
+  --p-ultimate-colors-blue-gray-100: #eaecf5; /* Primitives/ultimate colors/blue_gray/100 */
+  --p-ultimate-colors-blue-gray-200: #c8cce5; /* Primitives/ultimate colors/blue_gray/200 */
+  --p-ultimate-colors-blue-gray-300: #9ea5d1; /* Primitives/ultimate colors/blue_gray/300 */
+  --p-ultimate-colors-blue-gray-400: #717bbc; /* Primitives/ultimate colors/blue_gray/400 */
+  --p-ultimate-colors-blue-gray-500: #4e5ba6; /* Primitives/ultimate colors/blue_gray/500 */
+  --p-ultimate-colors-blue-gray-600: #3e4784; /* Primitives/ultimate colors/blue_gray/600 */
+  --p-ultimate-colors-blue-gray-700: #363f72; /* Primitives/ultimate colors/blue_gray/700 */
+  --p-ultimate-colors-blue-gray-800: #293056; /* Primitives/ultimate colors/blue_gray/800 */
+  --p-ultimate-colors-blue-light-25: #f5fbff; /* Primitives/ultimate colors/blue_light/25 */
+  --p-ultimate-colors-blue-gray-900: #101323; /* Primitives/ultimate colors/blue_gray/900 */
+  --p-ultimate-colors-blue-light-50: #f0f9ff; /* Primitives/ultimate colors/blue_light/50 */
+  --p-ultimate-colors-blue-light-100: #e0f2fe; /* Primitives/ultimate colors/blue_light/100 */
+  --p-ultimate-colors-blue-light-200: #b9e6fe; /* Primitives/ultimate colors/blue_light/200 */
+  --p-ultimate-colors-blue-light-300: #7cd4fd; /* Primitives/ultimate colors/blue_light/300 */
+  --p-ultimate-colors-blue-light-400: #36bffa; /* Primitives/ultimate colors/blue_light/400 */
+  --p-ultimate-colors-blue-light-500: #0ba5ec; /* Primitives/ultimate colors/blue_light/500 */
+  --p-ultimate-colors-blue-light-600: #0086c9; /* Primitives/ultimate colors/blue_light/600 */
+  --p-ultimate-colors-blue-light-700: #026aa2; /* Primitives/ultimate colors/blue_light/700 */
+  --p-ultimate-colors-blue-light-800: #065986; /* Primitives/ultimate colors/blue_light/800 */
+  --p-ultimate-colors-blue-light-900: #0b4a6f; /* Primitives/ultimate colors/blue_light/900 */
+  --p-ultimate-colors-gray-25: #fcfcfd; /* Primitives/ultimate colors/gray/25 */
+  --p-ultimate-colors-gray-50: #f9fafb; /* Primitives/ultimate colors/gray/50 */
+  --p-ultimate-colors-gray-100: #f2f4f7; /* Primitives/ultimate colors/gray/100 */
+  --p-ultimate-colors-gray-200: #e4e7ec; /* Primitives/ultimate colors/gray/200 */
+  --p-ultimate-colors-gray-300: #d0d5dd; /* Primitives/ultimate colors/gray/300 */
+  --p-ultimate-colors-gray-400: #98a2b3; /* Primitives/ultimate colors/gray/400 */
+  --p-ultimate-colors-gray-500: #667085; /* Primitives/ultimate colors/gray/500 */
+  --p-ultimate-colors-gray-600: #475467; /* Primitives/ultimate colors/gray/600 */
+  --p-ultimate-colors-gray-700: #344054; /* Primitives/ultimate colors/gray/700 */
+  --p-ultimate-colors-gray-800: #1d2939; /* Primitives/ultimate colors/gray/800 */
+  --p-ultimate-colors-gray-900: #101828; /* Primitives/ultimate colors/gray/900 */
+  --p-ultimate-colors-indigo-25: #f5f8ff; /* Primitives/ultimate colors/indigo/25 */
+  --p-ultimate-colors-indigo-50: #eef4ff; /* Primitives/ultimate colors/indigo/50 */
+  --p-ultimate-colors-indigo-100: #e0eaff; /* Primitives/ultimate colors/indigo/100 */
+  --p-ultimate-colors-indigo-200: #c7d7fe; /* Primitives/ultimate colors/indigo/200 */
+  --p-ultimate-colors-indigo-300: #a4bcfd; /* Primitives/ultimate colors/indigo/300 */
+  --p-ultimate-colors-indigo-400: #8098f9; /* Primitives/ultimate colors/indigo/400 */
+  --p-ultimate-colors-indigo-500: #6172f3; /* Primitives/ultimate colors/indigo/500 */
+  --p-ultimate-colors-indigo-600: #444ce7; /* Primitives/ultimate colors/indigo/600 */
+  --p-ultimate-colors-indigo-700: #3538cd; /* Primitives/ultimate colors/indigo/700 */
+  --p-ultimate-colors-indigo-800: #2d31a6; /* Primitives/ultimate colors/indigo/800 */
+  --p-ultimate-colors-indigo-900: #2d3282; /* Primitives/ultimate colors/indigo/900 */
+  --p-ultimate-colors-orange-25: #fffaf5; /* Primitives/ultimate colors/orange/25 */
+  --p-ultimate-colors-orange-50: #fff6ed; /* Primitives/ultimate colors/orange/50 */
+  --p-ultimate-colors-orange-100: #ffead5; /* Primitives/ultimate colors/orange/100 */
+  --p-ultimate-colors-orange-200: #fddcab; /* Primitives/ultimate colors/orange/200 */
+  --p-ultimate-colors-orange-300: #feb273; /* Primitives/ultimate colors/orange/300 */
+  --p-ultimate-colors-orange-400: #fd853a; /* Primitives/ultimate colors/orange/400 */
+  --p-ultimate-colors-orange-500: #fb6514; /* Primitives/ultimate colors/orange/500 */
+  --p-ultimate-colors-orange-600: #ec4a0a; /* Primitives/ultimate colors/orange/600 */
+  --p-ultimate-colors-orange-700: #c4320a; /* Primitives/ultimate colors/orange/700 */
+  --p-ultimate-colors-orange-800: #9c2a10; /* Primitives/ultimate colors/orange/800 */
+  --p-ultimate-colors-orange-900: #7e2410; /* Primitives/ultimate colors/orange/900 */
+  --p-ultimate-colors-pink-25: #fef6fb; /* Primitives/ultimate colors/pink/25 */
+  --p-ultimate-colors-pink-50: #fdf2fa; /* Primitives/ultimate colors/pink/50 */
+  --p-ultimate-colors-pink-100: #fce7f6; /* Primitives/ultimate colors/pink/100 */
+  --p-ultimate-colors-pink-200: #fcceee; /* Primitives/ultimate colors/pink/200 */
+  --p-ultimate-colors-pink-300: #faa7e0; /* Primitives/ultimate colors/pink/300 */
+  --p-ultimate-colors-pink-400: #f670c7; /* Primitives/ultimate colors/pink/400 */
+  --p-ultimate-colors-pink-500: #ee46bc; /* Primitives/ultimate colors/pink/500 */
+  --p-ultimate-colors-pink-600: #dd2590; /* Primitives/ultimate colors/pink/600 */
+  --p-ultimate-colors-pink-700: #c11574; /* Primitives/ultimate colors/pink/700 */
+  --p-ultimate-colors-pink-800: #9e165f; /* Primitives/ultimate colors/pink/800 */
+  --p-ultimate-colors-pink-900: #851651; /* Primitives/ultimate colors/pink/900 */
+  --p-ultimate-colors-purple-25: #fafaff; /* Primitives/ultimate colors/purple/25 */
+  --p-ultimate-colors-purple-50: #f4f3ff; /* Primitives/ultimate colors/purple/50 */
+  --p-ultimate-colors-purple-100: #ebe9fe; /* Primitives/ultimate colors/purple/100 */
+  --p-ultimate-colors-purple-200: #d9d6fe; /* Primitives/ultimate colors/purple/200 */
+  --p-ultimate-colors-purple-300: #bdb4fe; /* Primitives/ultimate colors/purple/300 */
+  --p-ultimate-colors-purple-400: #9b8afb; /* Primitives/ultimate colors/purple/400 */
+  --p-ultimate-colors-purple-500: #7a5af8; /* Primitives/ultimate colors/purple/500 */
+  --p-ultimate-colors-purple-600: #6938ef; /* Primitives/ultimate colors/purple/600 */
+  --p-ultimate-colors-purple-700: #5925dc; /* Primitives/ultimate colors/purple/700 */
+  --p-ultimate-colors-purple-800: #4a1fb8; /* Primitives/ultimate colors/purple/800 */
+  --p-ultimate-colors-ros-25: #fff5f6; /* Primitives/ultimate colors/ros/25 */
+  --p-ultimate-colors-purple-900: #3e1c96; /* Primitives/ultimate colors/purple/900 */
+  --p-ultimate-colors-ros-50: #fff1f3; /* Primitives/ultimate colors/ros/50 */
+  --p-ultimate-colors-ros-100: #ffe4e8; /* Primitives/ultimate colors/ros/100 */
+  --p-ultimate-colors-ros-200: #fecdd6; /* Primitives/ultimate colors/ros/200 */
+  --p-ultimate-colors-ros-300: #fea3b4; /* Primitives/ultimate colors/ros/300 */
+  --p-ultimate-colors-ros-400: #fd6f8e; /* Primitives/ultimate colors/ros/400 */
+  --p-ultimate-colors-ros-500: #f63d68; /* Primitives/ultimate colors/ros/500 */
+  --p-ultimate-colors-ros-600: #e31b54; /* Primitives/ultimate colors/ros/600 */
+  --p-ultimate-colors-ros-700: #c01048; /* Primitives/ultimate colors/ros/700 */
+  --p-ultimate-colors-ros-800: #a11043; /* Primitives/ultimate colors/ros/800 */
+  --p-ultimate-colors-ros-900: #89123e; /* Primitives/ultimate colors/ros/900 */
+  --p-ultimate-colors-white-white: #ffffff; /* Primitives/ultimate colors/white/white */
+  --p-color-tag-success-base: #0a7b55; /* Primitives/color/tag/success/base */
+  --p-color-tag-success-base-dark: #0d9966; /* Primitives/color/tag/success/base-dark */
+  --p-color-tag-success-light: #b6e2d2; /* Primitives/color/tag/success/light */
+  --p-color-tag-success-light-dark: #0d3324; /* Primitives/color/tag/success/light-dark */
+  --p-color-tag-brand-base: #005e5d; /* Primitives/color/tag/brand/base */
+  --p-color-tag-brand-base-dark: #007a78; /* Primitives/color/tag/brand/base-dark */
+  --p-color-tag-brand-subtle: #e5eeee; /* Primitives/color/tag/brand/subtle */
+  --p-color-tag-brand-subtle-dark: #112020; /* Primitives/color/tag/brand/subtle-dark */
+  --p-color-tag-brand-light: #ccdfde; /* Primitives/color/tag/brand/light */
+  --p-color-tag-brand-light-dark: #152525; /* Primitives/color/tag/brand/light-dark */
+  --p-color-tag-warning-base: #a55c0a; /* Primitives/color/tag/warning/base */
+  --p-color-tag-warning-base-dark: #bf6b0c; /* Primitives/color/tag/warning/base-dark */
+  --p-color-tag-warning-light: #fad6ae; /* Primitives/color/tag/warning/light */
+  --p-color-tag-warning-light-dark: #2e1c06; /* Primitives/color/tag/warning/light-dark */
+  --p-color-tag-info-base: #005ba5; /* Primitives/color/tag/info/base */
+  --p-color-tag-info-base-dark: #1a7acc; /* Primitives/color/tag/info/base-dark */
+  --p-color-tag-info-light: #a5cdee; /* Primitives/color/tag/info/light */
+  --p-color-tag-info-light-dark: #0f2a40; /* Primitives/color/tag/info/light-dark */
+  --p-color-tag-neutral-subtle: #f7f5ed; /* Primitives/color/tag/neutral/subtle */
+  --p-color-tag-neutral-subtle-dark: #1e1c15; /* Primitives/color/tag/neutral/subtle-dark */
+  --p-color-tag-neutral-light: #d4d0bd; /* Primitives/color/tag/neutral/light */
+  --p-color-tag-neutral-light-dark: #221f16; /* Primitives/color/tag/neutral/light-dark */
+  --p-color-tag-error-light: #eac2c2; /* Primitives/color/tag/error/light */
+  --p-color-tag-error-light-dark: #2e1010; /* Primitives/color/tag/error/light-dark */
+  --p-color-tag-warning-stroke: #de8215; /* Primitives/color/tag/warning/stroke */
+  --p-color-tag-warning-stroke-dark: #e89127; /* Primitives/color/tag/warning/stroke-dark */
+  --p-color-tag-neutral-stroke: #584446; /* Primitives/color/tag/neutral/stroke */
+  --p-color-tag-neutral-stroke-dark: #7a6264; /* Primitives/color/tag/neutral/stroke-dark */
+  --p-color-attention-success-surface-light: #ecfce8; /* Primitives/color/attention/success/surface-light */
+  --p-color-attention-success-surface-dark: #1a3320; /* Primitives/color/attention/success/surface-dark */
+  --p-color-attention-error-surface-light: #f7e9e9; /* Primitives/color/attention/error/surface-light */
+  --p-color-attention-error-surface-dark: #3b1414; /* Primitives/color/attention/error/surface-dark */
+  --p-color-tag-error-text-dark: #f5a0a0; /* Primitives/color/tag/error/text-dark */
+  --p-color-tag-error-base-dark: #e85c60; /* Primitives/color/tag/error/base-dark */
+  --p-color-overlay-scrim-light: #100f0f66; /* Primitives/color/overlay/scrim-light */
+  --p-color-overlay-scrim-dark: #100f0fa6; /* Primitives/color/overlay/scrim-dark */
+  --p-color-icon-default: #474b54; /* Primitives/color/icon/default */
+  --p-color-icon-default-dark: #9aa0ab; /* Primitives/color/icon/default-dark */
+  --p-color-icon-brand: #0775ce; /* Primitives/color/icon/brand */
+  --p-color-icon-brand-dark: #5babff; /* Primitives/color/icon/brand-dark */
+  --p-color-icon-disabled: #d9d9d9; /* Primitives/color/icon/disabled */
+  --p-color-icon-disabled-dark: #5e6370; /* Primitives/color/icon/disabled-dark */
+  --t-text-text-primary: var(--p-ultimate-colors-gray-900); /* Token Colors/text/text-primary */
+  --t-text-text-secondary: var(--p-ultimate-colors-gray-600); /* Token Colors/text/text-secondary */
+  --t-text-text-tertiary: var(--p-ultimate-colors-gray-400); /* Token Colors/text/text-tertiary */
+  --t-text-text-brand: var(--p-color-brand-raisin-black); /* Token Colors/text/text-brand */
+  --t-text-text-invert: var(--p-ultimate-colors-gray-25); /* Token Colors/text/text-invert */
+  --t-surface-surface-primary: var(--p-ultimate-colors-white-white); /* Token Colors/surface/surface-primary */
+  --t-surface-surface-secondary: var(--p-ultimate-colors-gray-50); /* Token Colors/surface/surface-secondary */
+  --t-surface-surface-tertiary: var(--p-ultimate-colors-blue-gray-100); /* Token Colors/surface/surface-tertiary */
+  --t-surface-surface-invert: var(--p-ultimate-colors-gray-800); /* Token Colors/surface/surface-invert */
+  --t-surface-surface-brand: var(--p-color-brand-bittersweer); /* Token Colors/surface/surface-brand */
+  --t-surface-surface-tableview-header: var(--p-ultimate-colors-blue-gray-100); /* Token Colors/surface/surface-tableview-header */
+  --t-surface-surface-tableview-odd: var(--p-ultimate-colors-blue-25); /* Token Colors/surface/surface-tableview-odd */
+  --t-surface-surface-attention-info: var(--p-color-blue-100); /* Token Colors/surface/surface-attention-info */
+  --t-surface-surface-attention-warning: var(--p-ultimate-colors-orange-100); /* Token Colors/surface/surface-attention-warning */
+  --t-border-border-primary: var(--p-ultimate-colors-gray-50); /* Token Colors/border/border-primary */
+  --t-border-border-secondary: var(--p-ultimate-colors-gray-200); /* Token Colors/border/border-secondary */
+  --t-border-border-tertiary: var(--p-ultimate-colors-gray-400); /* Token Colors/border/border-tertiary */
+  --t-border-border-invert: var(--p-ultimate-colors-gray-700); /* Token Colors/border/border-invert */
+  --t-attention-success: var(--p-color-dark-tones-green); /* Token Colors/attention/success */
+  --t-attention-warning: var(--p-color-dark-tones-orange); /* Token Colors/attention/warning */
+  --t-attention-error: var(--p-color-dark-tones-red); /* Token Colors/attention/error */
+  --t-cta-cta-primary-default: var(--p-ultimate-colors-blue-800); /* Token Colors/cta/cta-primary-default */
+  --t-cta-cta-primary-hover: var(--p-ultimate-colors-blue-900); /* Token Colors/cta/cta-primary-hover */
+  --t-cta-cta-primary-disabled: var(--p-ultimate-colors-gray-500); /* Token Colors/cta/cta-primary-disabled */
+  --t-cta-cta-primary-visited: var(--p-color-blue-500); /* Token Colors/cta/cta-primary-visited */
+  --t-cta-cta-primary-selected: var(--p-color-blue-800); /* Token Colors/cta/cta-primary-selected */
+  --t-shade-primary: var(--p-color-shade-transparent-dark-strong); /* Token Colors/shade-primary */
+  --t-shade-secondary: var(--p-color-shade-transparent-dark-medium); /* Token Colors/shade-secondary */
+  --t-surface-surface-attention-success: var(--p-color-attention-success-surface-light); /* Token Colors/surface/surface-attention-success */
+  --t-surface-surface-attention-error: var(--p-color-attention-error-surface-light); /* Token Colors/surface/surface-attention-error */
+  --t-surface-tag-success-base: var(--p-color-tag-success-base); /* Token Colors/surface/tag/success-base */
+  --t-surface-tag-success-light: var(--p-color-tag-success-light); /* Token Colors/surface/tag/success-light */
+  --t-surface-tag-brand-base: var(--p-color-tag-brand-base); /* Token Colors/surface/tag/brand-base */
+  --t-surface-tag-brand-subtle: var(--p-color-tag-brand-subtle); /* Token Colors/surface/tag/brand-subtle */
+  --t-surface-tag-brand-light: var(--p-color-tag-brand-light); /* Token Colors/surface/tag/brand-light */
+  --t-surface-tag-warning-base: var(--p-color-tag-warning-base); /* Token Colors/surface/tag/warning-base */
+  --t-surface-tag-warning-light: var(--p-color-tag-warning-light); /* Token Colors/surface/tag/warning-light */
+  --t-surface-tag-info-base: var(--p-color-tag-info-base); /* Token Colors/surface/tag/info-base */
+  --t-surface-tag-info-light: var(--p-color-tag-info-light); /* Token Colors/surface/tag/info-light */
+  --t-surface-tag-neutral-subtle: var(--p-color-tag-neutral-subtle); /* Token Colors/surface/tag/neutral-subtle */
+  --t-surface-tag-neutral-light: var(--p-color-tag-neutral-light); /* Token Colors/surface/tag/neutral-light */
+  --t-surface-tag-error-light: var(--p-color-tag-error-light); /* Token Colors/surface/tag/error-light */
+  --t-border-tag-warning: var(--p-color-tag-warning-stroke); /* Token Colors/border/tag/warning */
+  --t-border-tag-neutral: var(--p-color-tag-neutral-stroke); /* Token Colors/border/tag/neutral */
+  --t-border-tag-success: var(--p-color-tag-success-base); /* Token Colors/border/tag/success */
+  --t-border-tag-brand: var(--p-color-tag-brand-base); /* Token Colors/border/tag/brand */
+  --t-border-tag-info: var(--p-color-tag-info-base); /* Token Colors/border/tag/info */
+  --t-text-tag-success: var(--p-color-tag-success-base); /* Token Colors/text/tag/success */
+  --t-text-tag-error: var(--p-color-attention-error); /* Token Colors/text/tag/error */
+  --t-text-tag-warning: var(--p-color-tag-warning-base); /* Token Colors/text/tag/warning */
+  --t-text-tag-info: var(--p-color-tag-info-base); /* Token Colors/text/tag/info */
+  --t-text-tag-brand: var(--p-color-tag-brand-base); /* Token Colors/text/tag/brand */
+  --t-text-tag-neutral: var(--p-color-tag-neutral-stroke); /* Token Colors/text/tag/neutral */
+  --t-border-tag-error: var(--p-color-attention-error); /* Token Colors/border/tag/error */
+  --t-surface-interactive-hover: var(--p-color-grey-50); /* Token Colors/surface/interactive/hover */
+  --t-surface-interactive-pressed: var(--p-color-grey-100); /* Token Colors/surface/interactive/pressed */
+  --t-surface-interactive-disabled: var(--p-color-grey-100); /* Token Colors/surface/interactive/disabled */
+  --t-text-text-disabled: var(--p-color-grey-400); /* Token Colors/text/text-disabled */
+  --t-border-border-focus: var(--p-color-attention-info); /* Token Colors/border/border-focus */
+  --t-surface-overlay-scrim: var(--p-color-overlay-scrim-light); /* Token Colors/surface/overlay/scrim */
+  --t-text-icon-default: var(--p-color-icon-default); /* Token Colors/text/icon/default */
+  --t-text-icon-primary: var(--p-color-grey-black-100pct); /* Token Colors/text/icon/primary */
+  --t-text-icon-invert: var(--p-color-grey-white-100); /* Token Colors/text/icon/invert */
+  --t-text-icon-brand: var(--p-color-icon-brand); /* Token Colors/text/icon/brand */
+  --t-text-icon-error: var(--p-color-attention-error); /* Token Colors/text/icon/error */
+  --t-text-icon-disabled: var(--p-color-icon-disabled); /* Token Colors/text/icon/disabled */
+}

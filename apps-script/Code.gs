@@ -43,6 +43,33 @@ function doGet() {
 }
 
 /**
+ * JSON-API for nettsiden (namdalssl.no/oppmoteregistrering/).
+ * Nettsiden sender POST med Content-Type text/plain for å unngå CORS-preflight.
+ *   { action: 'init', pin }            → getInitialData(pin)
+ *   { action: 'register', ...payload } → register(payload)
+ * Svar: { ok: true, data } eller { ok: false, error }.
+ */
+function doPost(e) {
+  let body;
+  try {
+    body = JSON.parse((e && e.postData && e.postData.contents) || '{}');
+  } catch (err) {
+    return json_({ ok: false, error: 'Ugyldig forespørsel.' });
+  }
+  try {
+    if (body.action === 'init') return json_({ ok: true, data: getInitialData(body.pin) });
+    if (body.action === 'register') return json_({ ok: true, data: register(body) });
+    return json_({ ok: false, error: 'Ukjent handling.' });
+  } catch (err) {
+    return json_({ ok: false, error: String((err && err.message) || err) });
+  }
+}
+
+function json_(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
  * Data klienten trenger når siden lastes (og etter hver registrering).
  * @param {string=} pin  Tilgangskode hvis ACCESS_PIN er satt.
  */

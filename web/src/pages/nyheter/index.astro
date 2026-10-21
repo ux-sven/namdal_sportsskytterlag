@@ -1,10 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PostCard from '../../components/PostCard.astro';
-import { posts } from '../../lib/site.js';
+import { posts, url } from '../../lib/site.js';
 ---
 <Base title="Nyheter" description="Nyheter, kurs og arrangementer fra Namdal Sportsskytterlag.">
-  <section class="page-hero">
+  <section class="page-hero torn-bottom">
+    <img class="page-hero-img" src={url('/images/bergsmo.jpg')} alt="" />
     <div class="wrap">
       <p class="eyebrow">Aktuelt</p>
       <h1>Nyheter</h1>

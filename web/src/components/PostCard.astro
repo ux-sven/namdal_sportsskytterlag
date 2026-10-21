@@ -11,6 +11,6 @@ const { post } = Astro.props;
   <div class="card-body">
     <span class="card-meta">{formatDate(post.date)}{post.categories[0] && <> · {post.categories[0]}</>}</span>
     <h3>{post.title}</h3>
-    {post.excerpt && <p class="muted" style="margin:0">{post.excerpt.length > 140 ? post.excerpt.slice(0, 140).replace(/\s\S*$/, '') + ' …' : post.excerpt}</p>}
+    {post.excerpt && <p class="muted" style="margin:0;font-size:.95rem">{post.excerpt.length > 120 ? post.excerpt.slice(0, 120).replace(/\s\S*$/, '') + ' …' : post.excerpt}</p>}
   </div>
 </a>

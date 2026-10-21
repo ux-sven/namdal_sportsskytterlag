@@ -15,7 +15,8 @@ const more = posts.filter((p) => p.id !== post.id).slice(0, 3);
 const image = post.image ? media(post.image.src) : null;
 ---
 <Base title={post.title} description={post.excerpt} image={image}>
-  <section class="page-hero">
+  <section class="page-hero torn-bottom">
+    <img class="page-hero-img" src={image || url('/images/bergsmo.jpg')} alt="" />
     <div class="wrap">
       <p class="eyebrow"><a href={url('/nyheter/')} style="color:inherit">Nyheter</a>{post.categories[0] && <> · {post.categories[0]}</>}</p>
       <h1 style="max-width:28ch">{post.title}</h1>
@@ -25,7 +26,6 @@ const image = post.image ? media(post.image.src) : null;
   <section class="section" style="padding-top:48px">
     <div class="wrap layout-2">
       <article class="prose">
-        {image && <img src={image} alt={post.image.alt} width={post.image.width} height={post.image.height} style="margin-top:0" />}
         <Fragment set:html={html(post.html)} />
       </article>
       <aside class="aside">

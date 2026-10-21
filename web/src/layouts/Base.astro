@@ -24,11 +24,11 @@ const ogImage = new URL(image || url('/images/hero-dynamisk.jpg'), Astro.site);
     <meta property="og:locale" content="nb_NO" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=PT+Serif&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=PT+Serif:ital@0;1&display=swap" rel="stylesheet" />
   </head>
   <body>
     <a class="skip" href="#main">Hopp til innhold</a>
-    <div style="min-height:100vh;display:flex;flex-direction:column">
+    <div class="paper" style="min-height:100vh;display:flex;flex-direction:column">
       <Header />
       <main id="main"><slot /></main>
       <Footer />

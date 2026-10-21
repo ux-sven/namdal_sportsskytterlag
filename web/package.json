@@ -3,14 +3,18 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "tokens": "node scripts/build-tokens.mjs",
+    "check:tokens": "node scripts/check-tokens.mjs",
     "content": "node scripts/fetch-content.mjs",
-    "dev": "astro dev",
-    "build": "node scripts/fetch-content.mjs && astro build",
+    "dev": "node scripts/build-tokens.mjs && astro dev",
+    "build": "node scripts/build-tokens.mjs && node scripts/check-tokens.mjs && node scripts/fetch-content.mjs && astro build",
     "preview": "astro preview"
   },
   "dependencies": {
     "astro": "5.18.2",
     "sanitize-html": "2.18.1"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }
