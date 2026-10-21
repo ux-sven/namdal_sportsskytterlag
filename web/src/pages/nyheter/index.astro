@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import { posts } from '../../lib/site.js';
+---
+<Base title="Nyheter" description="Nyheter, kurs og arrangementer fra Namdal Sportsskytterlag.">
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">Aktuelt</p>
+      <h1>Nyheter</h1>
+      <p>Kurs, konkurranser og annet som skjer i klubben.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap grid grid-3">{posts.map((p) => <PostCard post={p} />)}</div>
+  </section>
+</Base>

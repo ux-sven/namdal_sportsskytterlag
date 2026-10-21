@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registrer tilstedeværelse – Namdal Sportsskytterlag</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=PT+Serif&display=swap" rel="stylesheet">
+  <style>
+    /* Tokens fra Figma-fila «Medlemsregister» */
+    :root {
+      --text-primary: #101828;
+      --text-secondary: #475467;
+      --text-invert: #fcfcfd;
+      --text-brand: #1849a9;
+      --surface-primary: #ffffff;
+      --surface-page: #ffffff;
+      --surface-hover: #f3f0e8;
+      --surface-brand-light: #d6e9e5;
+      --border-brand: #4f9a8f;
+      --border-secondary: #e4e7ec;
+      --border-tertiary: #98a2b3;
+      --cta: #1849a9;
+      --cta-hover: #153e8f;
+      --error: #b42318;
+      --error-surface: #fef3f2;
+      --success: #067647;
+      --success-surface: #ecfdf3;
+      --radius-m: 4px;
+      --radius-xl: 16px;
+      --shadow: 1px 4px 14px rgba(11, 11, 11, .18);
+      --font-head: "PT Serif", Georgia, serif;
+      --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--surface-page); color: var(--text-primary); font-family: var(--font-body); font-size: 16px; line-height: 24px; }
+    button, input { font: inherit; color: inherit; }
+    [hidden] { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    .page { max-width: 752px; margin: 0 auto; padding: 48px 16px 32px; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .logo { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .logo-mark { width: 48px; height: 48px; border-radius: 50%; background: var(--cta); display: grid; place-items: center; }
+    .logo-text { font-family: var(--font-head); font-size: 28px; line-height: 42px; }
+    h1 { font-family: var(--font-head); font-weight: 400; font-size: 32px; line-height: 48px; margin: 0 0 8px; }
+    .lead { color: var(--text-secondary); font-size: 18px; line-height: 30px; margin: 0; }
+
+    .card { background: var(--surface-primary); border-radius: var(--radius-xl); box-shadow: var(--shadow); padding: 32px; }
+    @media (max-width: 520px) { .card { padding: 20px; } .logo-text { font-size: 22px; } h1 { font-size: 26px; line-height: 36px; } }
+    form { display: flex; flex-direction: column; gap: 24px; }
+
+    fieldset { border: 0; padding: 0; margin: 0; }
+    legend, .label { display: block; color: var(--text-secondary); margin-bottom: 8px; }
+    legend { color: var(--text-primary); font-weight: 600; }
+    .radios { display: flex; gap: 8px; }
+    .radio { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px 0 12px; border: 1px solid var(--border-tertiary); border-radius: 999px; cursor: pointer; }
+    .radio input { width: 20px; height: 20px; margin: 0; accent-color: var(--cta); }
+    .radio:has(input:checked) { border-color: var(--cta); background: #eef3fc; color: var(--text-brand); font-weight: 500; }
+
+    .textbox { display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 12px 0 16px; border: 1px solid var(--border-tertiary); border-radius: var(--radius-m); background: var(--surface-primary); }
+    .textbox:focus-within { border-color: var(--cta); box-shadow: 0 0 0 1px var(--cta); }
+    .textbox.invalid { border-color: var(--error); box-shadow: 0 0 0 1px var(--error); }
+    .textbox input { flex: 1; min-width: 0; border: 0; outline: 0; padding: 12px 0; font-size: 18px; background: transparent; }
+    .textbox input::placeholder { color: var(--text-secondary); }
+    .icon { flex: none; color: var(--text-secondary); }
+    .icon-btn { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border: 0; background: none; border-radius: var(--radius-m); color: var(--text-secondary); cursor: pointer; }
+    .icon-btn:hover { background: var(--surface-hover); }
+    .readonly { min-height: 52px; display: flex; align-items: center; padding: 0 16px; border: 1px solid var(--border-secondary); border-radius: var(--radius-m); font-size: 18px; color: var(--text-primary); }
+    .field-error { color: var(--error); font-size: 14px; line-height: 22px; margin-top: 6px; }
+    .help { display: flex; gap: 8px; align-items: flex-start; margin-top: 8px; color: var(--text-secondary); font-size: 14px; line-height: 22px; }
+    .help svg { flex: none; margin-top: 3px; }
+
+    /* Combobox */
+    .combo { position: relative; }
+    .panel { position: absolute; z-index: 10; left: 0; right: 0; top: calc(100% + 4px); background: var(--surface-primary); border: 1px solid var(--border-tertiary); border-radius: var(--radius-m); box-shadow: var(--shadow); padding: 8px 0; }
+    .panel-head { padding: 8px 16px; font-size: 14px; line-height: 22px; color: var(--text-secondary); }
+    .listbox { list-style: none; margin: 0; padding: 0; max-height: 312px; overflow-y: auto; overscroll-behavior: contain; }
+    .option { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 12px 16px; font-size: 18px; line-height: 24px; cursor: pointer; }
+    .option[aria-selected="true"] { background: var(--surface-brand-light); color: var(--text-brand); }
+    .option.active { background: var(--surface-hover); }
+    .option .name { flex: 1; }
+    .option mark { background: none; color: inherit; font-weight: 600; }
+    .option .check { visibility: hidden; color: var(--text-brand); }
+    .option[aria-selected="true"] .check { visibility: visible; }
+    .empty { padding: 12px 16px; color: var(--text-secondary); }
+    .panel-foot { border-top: 1px solid var(--border-secondary); margin-top: 8px; padding: 12px 16px 4px; font-size: 14px; line-height: 22px; color: var(--text-secondary); }
+
+    .link { border: 0; background: none; padding: 0; color: var(--text-brand); text-decoration: underline; cursor: pointer; font-size: inherit; }
+    .link-lg { min-height: 44px; padding: 0 8px; font-size: 16px; }
+
+    .remembered { display: flex; align-items: center; gap: 12px; padding: 16px; background: var(--surface-brand-light); border: 1px solid var(--border-brand); border-radius: var(--radius-m); }
+    .remembered .text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .remembered .small { font-size: 14px; line-height: 22px; color: var(--text-secondary); }
+    .remembered strong { font-weight: 600; font-size: 16px; line-height: 28px; }
+
+    .check-row { display: flex; align-items: center; gap: 12px; min-height: 44px; cursor: pointer; }
+    .check-row input { width: 24px; height: 24px; margin: 0; accent-color: var(--cta); flex: none; }
+
+    .alert { padding: 12px 16px; border-radius: var(--radius-m); background: var(--error-surface); color: var(--error); border: 1px solid #fda29b; }
+    .alert.info { background: #eff8ff; color: #175cd3; border-color: #b2ddff; }
+
+    .btn { min-height: 62px; border: 0; border-radius: var(--radius-m); background: var(--cta); color: var(--text-invert); font-size: 18px; line-height: 30px; cursor: pointer; }
+    .btn:hover { background: var(--cta-hover); }
+    .btn:disabled { opacity: .6; cursor: progress; }
+    .btn-secondary { background: none; color: var(--text-brand); border: 1px solid var(--cta); }
+    .btn-secondary:hover { background: #eef3fc; }
+    :focus-visible { outline: 3px solid #84adff; outline-offset: 2px; }
+
+    .success { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .success-mark { width: 72px; height: 72px; border-radius: 50%; background: var(--success-surface); color: var(--success); display: grid; place-items: center; }
+    .success h2 { font-family: var(--font-head); font-weight: 400; font-size: 28px; line-height: 42px; margin: 8px 0 0; }
+    .success p { margin: 0; color: var(--text-secondary); font-size: 18px; line-height: 30px; }
+    .success .btn { width: 100%; margin-top: 16px; }
+    .countdown { font-size: 14px !important; }
+
+    .status { text-align: center; color: var(--text-secondary); padding: 48px 0; }
+    .footer { text-align: center; color: var(--text-secondary); font-size: 14px; margin-top: 40px; }
+    /* Innebygd på nettsiden (?embed=1): nettsiden viser allerede logo og tittel */
+    body.embed .header, body.embed .footer { display: none; }
+    body.embed .page { padding-top: 24px; }
+    .demo-badge { display: inline-block; margin-top: 8px; padding: 2px 10px; border-radius: 999px; background: #fffaeb; color: #b54708; font-size: 13px; }
+  </style>
+</head>
+<body>
+<main class="page">
+  <header class="header">
+    <div class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="#fff"/></svg>
+      </span>
+      <span class="logo-text">Namdal Sportsskytterlag</span>
+    </div>
+    <h1>Registrer tilstedeværelse</h1>
+    <p class="lead" id="lead">Velkommen til skytetrening. Registrer deg nedenfor.</p>
+  </header>
+
+  <div class="status" id="loadingView" role="status">Laster medlemslisten …</div>
+
+  <section class="card" id="pinView" hidden>
+    <form id="pinForm" novalidate>
+      <div>
+        <label class="label" for="pin">Tilgangskode</label>
+        <div class="textbox"><input id="pin" inputmode="numeric" autocomplete="off" placeholder="Skriv inn klubbens kode"></div>
+        <div class="field-error" id="pinError" hidden>Feil kode. Prøv igjen.</div>
+      </div>
+      <button class="btn" type="submit">Fortsett</button>
+    </form>
+  </section>
+
+  <section class="card" id="formView" hidden>
+    <form id="form" novalidate>
+      <fieldset>
+        <legend>Jeg er</legend>
+        <div class="radios">
+          <label class="radio"><input type="radio" name="type" value="medlem" checked> Medlem</label>
+          <label class="radio"><input type="radio" name="type" value="gjest"> Gjest</label>
+        </div>
+      </fieldset>
+
+      <div id="memberBlock"></div>
+
+      <div id="guestBlock" hidden>
+        <div>
+          <label class="label" for="guestName">Navn på gjest</label>
+          <div class="textbox" id="guestBox"><input id="guestName" autocomplete="off" placeholder="Fornavn og etternavn"></div>
+          <div class="field-error" id="guestError" hidden></div>
+        </div>
+        <div id="invitedBlock" style="margin-top:24px"></div>
+      </div>
+
+      <div id="leaderBlock">
+        <div id="leaderPick">
+          <div id="leaderCombo"></div>
+          <div class="help" id="leaderHelp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-6h2v6Zm0-8h-2V7h2v2Z"/></svg>
+            <span id="leaderHelpText">Velges én gang per trening. De som registrerer seg etter deg slipper å velge skyteleder.</span>
+          </div>
+          <button type="button" class="link link-lg" id="cancelChange" hidden>Avbryt endring</button>
+        </div>
+        <div class="remembered" id="leaderRemembered" hidden>
+          <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="var(--text-brand)" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 4a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Zm0 14a8 8 0 0 1-6.2-2.9C7 15.6 9.4 14.5 12 14.5s5 1.1 6.2 2.6A8 8 0 0 1 12 20Z"/></svg>
+          <div class="text">
+            <span class="small">Skyteleder i dag</span>
+            <strong id="leaderName"></strong>
+            <span class="small" id="leaderSetAt"></span>
+          </div>
+          <button type="button" class="link link-lg" id="changeLeader">Endre</button>
+        </div>
+      </div>
+
+      <div>
+        <span class="label">Dato</span>
+        <div class="readonly" id="dateText"></div>
+      </div>
+
+      <div>
+        <label class="check-row"><input type="checkbox" id="confirm"> Jeg bekrefter at jeg er tilstede for skytetreningen i dag</label>
+        <div class="field-error" id="confirmError" hidden>Kryss av for å bekrefte at du er til stede.</div>
+      </div>
+
+      <div class="alert" id="formAlert" role="alert" hidden></div>
+      <button class="btn" type="submit" id="submitBtn">Registrer tilstedeværelse</button>
+    </form>
+  </section>
+
+  <section class="card success" id="successView" hidden aria-live="polite">
+    <div class="success-mark" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <h2 id="successTitle">Takk!</h2>
+    <p id="successText"></p>
+    <p class="countdown" id="countdown"></p>
+    <button class="btn" type="button" id="nextBtn">Registrer neste</button>
+  </section>
+
+  <footer class="footer">
+    Namdal Sportsskytterlag
+    <div id="demoBadge" hidden><span class="demo-badge">Demo – lokale testdata</span></div>
+  </footer>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------------- API (Apps Script eller lokal demo) ---------------- */
+  var hasGAS = typeof google !== 'undefined' && google.script && google.script.run;
+
+  var mock = (function () {
+    var members = ['Anders Aune', 'Berit Bakken', 'Eirik Dahl', 'Hanne Fjeld', 'Jonas Grøtte', 'Kari Nordmann',
+      'Kristian Berg', 'Kristine Moen', 'Lars Haugen', 'Marte Lien', 'Nils Øvergård', 'Ola Kristiansen',
+      'Per Ås', 'Silje Hammer', 'Tor Ekre', 'Åse Vik'].sort(function (a, b) { return a.localeCompare(b, 'nb'); });
+    var leaders = ['Kari Nordmann', 'Lars Haugen', 'Tor Ekre'];
+    var params = new URLSearchParams(location.search);
+    var session = params.get('state') === 'husket' ? { name: 'Kari Nordmann', setAt: '17:58' } : null;
+    var regs = [];
+    var today = new Date(); today = today.getFullYear() + '-' + pad(today.getMonth() + 1) + '-' + pad(today.getDate());
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function now() { var d = new Date(); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+    function delay(v) { return new Promise(function (r) { setTimeout(function () { r(v); }, 350); }); }
+    return {
+      getInitialData: function () {
+        return delay({ today: today, members: members, leaders: leaders, todayLeader: session, registeredToday: regs.length });
+      },
+      register: function (p) {
+        if (!session && !p.leader) return delay({ status: 'needLeader' });
+        if (!session) session = { name: p.leader, setAt: now() };
+        else if (p.changeLeader && p.leader) session = { name: p.leader, setAt: session.setAt };
+        if (regs.indexOf(p.name.toLowerCase()) >= 0) return delay({ status: 'already', name: p.name, leader: session.name });
+        regs.push(p.name.toLowerCase());
+        return delay({ status: 'ok', name: p.name, time: now(), leader: session.name });
+      }
+    };
+  })();
+
+  function api(fn) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return new Promise(function (resolve, reject) {
+      if (hasGAS) {
+        var runner = google.script.run.withSuccessHandler(resolve).withFailureHandler(reject);
+        runner[fn].apply(runner, args);
+      } else {
+        mock[fn].apply(null, args).then(resolve, reject);
+      }
+    });
+  }
+
+  function readPin() { try { return localStorage.getItem('nssl-pin') || ''; } catch (e) { return ''; } }
+  function savePin(v) { try { localStorage.setItem('nssl-pin', v); } catch (e) {} }
+
+  /* ---------------- Ikoner ---------------- */
+  var ICON_SEARCH = '<svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
+  var ICON_CLEAR = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.2 12.8-1.4 1.4L12 13.4l-2.8 2.8-1.4-1.4 2.8-2.8-2.8-2.8 1.4-1.4 2.8 2.8 2.8-2.8 1.4 1.4-2.8 2.8 2.8 2.8Z"/></svg>';
+  var ICON_CHEVRON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+  var ICON_CHECK = '<svg class="check" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+
+  /* ---------------- Combobox: søk + liste i ett ---------------- */
+  var comboCount = 0;
+  function Combobox(mount, opts) {
+    var id = 'combo' + (++comboCount);
+    this.opts = opts;
+    this.options = [];
+    this.value = null;
+    this.activeIndex = -1;
+    this.filtered = [];
+    mount.innerHTML =
+      '<div class="combo">' +
+        '<label class="label" for="' + id + '"></label>' +
+        '<div class="textbox">' + ICON_SEARCH +
+          '<input id="' + id + '" type="text" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="' + id + '-list" autocomplete="off" autocapitalize="words" spellcheck="false">' +
+          '<button type="button" class="icon-btn clear" aria-label="Tøm feltet" hidden>' + ICON_CLEAR + '</button>' +
+          '<button type="button" class="icon-btn toggle" aria-label="Vis hele listen" tabindex="-1">' + ICON_CHEVRON + '</button>' +
+        '</div>' +
+        '<div class="field-error" hidden></div>' +
+        '<div class="panel" hidden>' +
+          '<div class="panel-head" aria-live="polite"></div>' +
+          '<ul class="listbox" role="listbox" id="' + id + '-list"></ul>' +
+          (opts.footer ? '<div class="panel-foot">' + opts.footer.text + ' <button type="button" class="link foot-link">' + opts.footer.link + '</button></div>' : '') +
+        '</div>' +
+      '</div>';
+    this.root = mount.firstChild;
+    this.input = this.root.querySelector('input');
+    this.box = this.root.querySelector('.textbox');
+    this.panel = this.root.querySelector('.panel');
+    this.head = this.root.querySelector('.panel-head');
+    this.list = this.root.querySelector('.listbox');
+    this.clearBtn = this.root.querySelector('.clear');
+    this.error = this.root.querySelector('.field-error');
+    this.root.querySelector('label').textContent = opts.label;
+    this.input.placeholder = opts.placeholder;
+    this.bind();
+  }
+
+  Combobox.prototype.bind = function () {
+    var self = this;
+    this.input.addEventListener('input', function () {
+      self.setError('');
+      self.value = self.exactMatch(self.input.value);
+      self.clearBtn.hidden = !self.input.value;
+      self.open();
+    });
+    this.input.addEventListener('focus', function () { if (self.input.value) self.open(); });
+    this.input.addEventListener('click', function () { self.open(); });
+    this.input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); self.open(); self.move(1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); self.move(-1); }
+      else if (e.key === 'Enter') {
+        if (!self.panel.hidden && self.filtered.length) {
+          e.preventDefault();
+          self.select(self.filtered[Math.max(self.activeIndex, 0)]);
+        }
+      } else if (e.key === 'Escape') { self.close(); }
+    });
+    this.input.addEventListener('blur', function () {
+      setTimeout(function () {
+        if (self.root.contains(document.activeElement)) return;
+        self.close();
+        var m = self.exactMatch(self.input.value);
+        if (m) { self.value = m; self.input.value = m; }
+      }, 120);
+    });
+    this.root.querySelector('.toggle').addEventListener('mousedown', function (e) { e.preventDefault(); });
+    this.root.querySelector('.toggle').addEventListener('click', function () {
+      if (self.panel.hidden) { self.input.focus(); self.open(true); } else { self.close(); }
+    });
+    this.clearBtn.addEventListener('click', function () { self.clear(); self.input.focus(); self.open(true); });
+    this.list.addEventListener('mousedown', function (e) { e.preventDefault(); });
+    this.list.addEventListener('click', function (e) {
+      var li = e.target.closest('.option');
+      if (li) self.select(li.getAttribute('data-value'));
+    });
+    var foot = this.root.querySelector('.foot-link');
+    if (foot) {
+      foot.addEventListener('mousedown', function (e) { e.preventDefault(); });
+      foot.addEventListener('click', function () { var t = self.input.value; self.close(); self.opts.footer.onClick(t); });
+    }
+  };
+
+  Combobox.prototype.setOptions = function (list) { this.options = list.slice(); };
+  Combobox.prototype.exactMatch = function (text) {
+    var t = text.trim().toLowerCase();
+    for (var i = 0; i < this.options.length; i++) if (this.options[i].toLowerCase() === t) return this.options[i];
+    return null;
+  };
+
+  Combobox.prototype.rank = function (q) {
+    q = q.trim().toLowerCase();
+    if (!q) return this.options.slice();
+    var starts = [], words = [], contains = [];
+    this.options.forEach(function (o) {
+      var l = o.toLowerCase(), i = l.indexOf(q);
+      if (i === 0) starts.push(o);
+      else if (i > 0 && (l.indexOf(' ' + q) >= 0 || l.indexOf('-' + q) >= 0)) words.push(o);
+      else if (i > 0) contains.push(o);
+    });
+    return starts.concat(words, contains);
+  };
+
+  Combobox.prototype.open = function (showAll) {
+    var q = showAll ? '' : this.input.value;
+    if (showAll && this.value) q = '';
+    this.filtered = this.rank(q);
+    this.activeIndex = this.filtered.length && q ? 0 : -1;
+    this.render(q.trim());
+    this.panel.hidden = false;
+    this.input.setAttribute('aria-expanded', 'true');
+  };
+
+  Combobox.prototype.close = function () {
+    this.panel.hidden = true;
+    this.input.setAttribute('aria-expanded', 'false');
+    this.input.removeAttribute('aria-activedescendant');
+  };
+
+  Combobox.prototype.render = function (q) {
+    var self = this;
+    this.head.textContent = q
+      ? (this.filtered.length === 1 ? '1 treff' : this.filtered.length + ' treff')
+      : this.opts.allLabel + ' (' + this.options.length + ') · skriv for å filtrere';
+    this.list.innerHTML = '';
+    if (!this.filtered.length) {
+      var empty = document.createElement('li');
+      empty.className = 'empty';
+      empty.textContent = 'Ingen treff på «' + q + '».';
+      this.list.appendChild(empty);
+      return;
+    }
+    var ql = q.toLowerCase();
+    this.filtered.forEach(function (o, i) {
+      var li = document.createElement('li');
+      li.className = 'option' + (i === self.activeIndex ? ' active' : '');
+      li.id = self.input.id + '-opt' + i;
+      li.setAttribute('role', 'option');
+      li.setAttribute('data-value', o);
+      li.setAttribute('aria-selected', o === self.value ? 'true' : 'false');
+      var name = document.createElement('span');
+      name.className = 'name';
+      var at = ql ? o.toLowerCase().indexOf(ql) : -1;
+      if (at >= 0) {
+        name.appendChild(document.createTextNode(o.slice(0, at)));
+        var m = document.createElement('mark'); m.textContent = o.slice(at, at + q.length); name.appendChild(m);
+        name.appendChild(document.createTextNode(o.slice(at + q.length)));
+      } else {
+        name.textContent = o;
+      }
+      li.appendChild(name);
+      li.insertAdjacentHTML('beforeend', ICON_CHECK);
+      self.list.appendChild(li);
+    });
+    this.syncActive();
+  };
+
+  Combobox.prototype.move = function (d) {
+    if (!this.filtered.length) return;
+    this.activeIndex = (this.activeIndex + d + this.filtered.length) % this.filtered.length;
+    var items = this.list.querySelectorAll('.option');
+    for (var i = 0; i < items.length; i++) items[i].classList.toggle('active', i === this.activeIndex);
+    this.syncActive();
+  };
+
+  Combobox.prototype.syncActive = function () {
+    var el = this.activeIndex >= 0 ? this.list.querySelector('#' + this.input.id + '-opt' + this.activeIndex) : null;
+    if (el) { this.input.setAttribute('aria-activedescendant', el.id); el.scrollIntoView({ block: 'nearest' }); }
+    else this.input.removeAttribute('aria-activedescendant');
+  };
+
+  Combobox.prototype.select = function (v) {
+    this.value = v;
+    this.input.value = v;
+    this.clearBtn.hidden = false;
+    this.setError('');
+    this.close();
+    if (this.opts.onSelect) this.opts.onSelect(v);
+  };
+
+  Combobox.prototype.clear = function () {
+    this.value = null; this.input.value = ''; this.clearBtn.hidden = true; this.setError('');
+  };
+
+  Combobox.prototype.setError = function (msg) {
+    this.error.textContent = msg;
+    this.error.hidden = !msg;
+    this.box.classList.toggle('invalid', !!msg);
+  };
+
+  /* ---------------- Skjema ---------------- */
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { data: null, changingLeader: false, timer: null };
+
+  var memberCombo = new Combobox($('memberBlock'), {
+    label: 'Medlemsnavn', placeholder: 'Søk eller velg navn', allLabel: 'Alle medlemmer',
+    footer: { text: 'Finner du ikke navnet ditt?', link: 'Registrer deg som gjest', onClick: function (typed) {
+      document.querySelector('input[name=type][value=gjest]').checked = true;
+      setType('gjest');
+      $('guestName').value = typed || '';
+      $('guestName').focus();
+    } }
+  });
+  var invitedCombo = new Combobox($('invitedBlock'), {
+    label: 'Invitert av (valgfritt)', placeholder: 'Søk eller velg medlem', allLabel: 'Alle medlemmer'
+  });
+  var leaderCombo = new Combobox($('leaderCombo'), {
+    label: 'Skyteleder', placeholder: 'Søk eller velg skyteleder', allLabel: 'Alle skyteledere'
+  });
+
+  function setType(t) {
+    $('memberBlock').hidden = t !== 'medlem';
+    $('guestBlock').hidden = t !== 'gjest';
+    hideAlert();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('input[name=type]'), function (r) {
+    r.addEventListener('change', function () { setType(r.value); });
+  });
+
+  function formatDate(iso, withWeekday) {
+    var p = iso.split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    var o = withWeekday ? { weekday: 'long', day: 'numeric', month: 'long' } : { day: 'numeric', month: 'long', year: 'numeric' };
+    return new Intl.DateTimeFormat('nb-NO', o).format(d);
+  }
+
+  function renderLeader() {
+    var tl = state.data.todayLeader;
+    var remembered = tl && !state.changingLeader;
+    $('leaderRemembered').hidden = !remembered;
+    $('leaderPick').hidden = remembered;
+    $('cancelChange').hidden = !(tl && state.changingLeader);
+    $('leaderHelp').hidden = !!(tl && state.changingLeader);
+    if (tl) {
+      $('leaderName').textContent = tl.name;
+      $('leaderSetAt').textContent = 'Valgt kl. ' + tl.setAt + ' – gjelder hele treningen';
+    }
+  }
+
+  $('changeLeader').addEventListener('click', function () {
+    state.changingLeader = true;
+    leaderCombo.clear();
+    renderLeader();
+    leaderCombo.input.focus();
+    leaderCombo.open(true);
+  });
+  $('cancelChange').addEventListener('click', function () {
+    state.changingLeader = false;
+    leaderCombo.clear();
+    renderLeader();
+  });
+
+  function applyData(data) {
+    state.data = data;
+    memberCombo.setOptions(data.members);
+    invitedCombo.setOptions(data.members);
+    leaderCombo.setOptions(data.leaders);
+    $('lead').textContent = 'Skytetrening ' + formatDate(data.today, true) + '. Registrer deg nedenfor.';
+    $('dateText').textContent = formatDate(data.today, false);
+    renderLeader();
+  }
+
+  function resetForm() {
+    memberCombo.clear(); invitedCombo.clear(); leaderCombo.clear();
+    $('guestName').value = ''; $('confirm').checked = false;
+    document.querySelector('input[name=type][value=medlem]').checked = true;
+    setType('medlem');
+    state.changingLeader = false;
+    ['guestError', 'confirmError'].forEach(function (k) { $(k).hidden = true; });
+    $('guestBox').classList.remove('invalid');
+    hideAlert();
+  }
+
+  function showAlert(msg, info) { var a = $('formAlert'); a.textContent = msg; a.className = 'alert' + (info ? ' info' : ''); a.hidden = false; }
+  function hideAlert() { $('formAlert').hidden = true; }
+
+  function show(view) {
+    ['loadingView', 'pinView', 'formView', 'successView'].forEach(function (v) { $(v).hidden = v !== view; });
+  }
+
+  function validate() {
+    var ok = true, first = null;
+    var type = document.querySelector('input[name=type]:checked').value;
+    if (type === 'medlem' && !memberCombo.value) {
+      memberCombo.setError(memberCombo.input.value ? 'Velg navnet ditt fra listen.' : 'Søk opp og velg navnet ditt.');
+      ok = false; first = first || memberCombo.input;
+    }
+    if (type === 'gjest') {
+      var g = $('guestName').value.trim();
+      var err = !g ? 'Skriv inn navnet på gjesten.' : '';
+      $('guestError').textContent = err; $('guestError').hidden = !err; $('guestBox').classList.toggle('invalid', !!err);
+      if (err) { ok = false; first = first || $('guestName'); }
+      if (invitedCombo.input.value && !invitedCombo.value) { invitedCombo.setError('Velg et medlem fra listen, eller tøm feltet.'); ok = false; first = first || invitedCombo.input; }
+    }
+    var needLeader = !state.data.todayLeader || state.changingLeader;
+    if (needLeader && !leaderCombo.value) {
+      leaderCombo.setError('Velg dagens skyteleder.');
+      ok = false; first = first || leaderCombo.input;
+    }
+    $('confirmError').hidden = $('confirm').checked;
+    if (!$('confirm').checked) { ok = false; first = first || $('confirm'); }
+    if (first) first.focus();
+    return ok;
+  }
+
+  $('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    hideAlert();
+    if (!validate()) return;
+    var type = document.querySelector('input[name=type]:checked').value;
+    var payload = {
+      pin: readPin(),
+      type: type,
+      name: type === 'medlem' ? memberCombo.value : $('guestName').value.trim(),
+      invitedBy: type === 'gjest' ? (invitedCombo.value || '') : '',
+      leader: leaderCombo.value || '',
+      changeLeader: state.changingLeader
+    };
+    var btn = $('submitBtn');
+    btn.disabled = true; btn.textContent = 'Registrerer …';
+    api('register', payload).then(function (res) {
+      if (res.status === 'ok') return showSuccess(res);
+      if (res.status === 'already') return showAlert(res.name + ' er allerede registrert på dagens trening.', true);
+      if (res.status === 'needLeader') {
+        state.data.todayLeader = null; renderLeader();
+        leaderCombo.setError('Velg dagens skyteleder.');
+      }
+    }).catch(handleError).then(function () {
+      btn.disabled = false; btn.textContent = 'Registrer tilstedeværelse';
+    });
+  });
+
+  function showSuccess(res) {
+    var first = res.name.split(' ')[0];
+    $('successTitle').textContent = 'Takk, ' + first + '!';
+    $('successText').textContent = 'Du er registrert på dagens trening kl. ' + res.time + '. Skyteleder: ' + res.leader + '.';
+    show('successView');
+    $('nextBtn').focus();
+    var left = 6;
+    clearInterval(state.timer);
+    var tick = function () {
+      left -= 1;
+      $('countdown').textContent = 'Skjemaet nullstilles om ' + left + ' sekunder.';
+      if (left <= 0) next();
+    };
+    tick();
+    state.timer = setInterval(tick, 1000);
+  }
+
+  function next() {
+    clearInterval(state.timer);
+    resetForm();
+    load();
+  }
+  $('nextBtn').addEventListener('click', next);
+
+  function handleError(err) {
+    var msg = (err && err.message) || String(err);
+    if (msg.indexOf('PIN_REQUIRED') >= 0) { savePin(''); show('pinView'); $('pin').focus(); return; }
+    show('formView');
+    showAlert(msg.replace(/^(Exception|Error):\s*/, '') || 'Noe gikk galt. Prøv igjen.');
+  }
+
+  $('pinForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    savePin($('pin').value.trim());
+    api('getInitialData', readPin()).then(function (data) {
+      $('pinError').hidden = true; applyData(data); show('formView');
+    }).catch(function (err) {
+      if (String(err && err.message).indexOf('PIN_REQUIRED') >= 0) { $('pinError').hidden = false; $('pin').select(); }
+      else handleError(err);
+    });
+  });
+
+  function load() {
+    if (!state.data) show('loadingView');
+    api('getInitialData', readPin()).then(function (data) {
+      applyData(data);
+      show('formView');
+    }).catch(handleError);
+  }
+
+  if (!hasGAS) $('demoBadge').hidden = false;
+  var embedded = new URLSearchParams(location.search).get('embed') === '1';
+  if (embedded) document.body.classList.add('embed');
+  if (hasGAS && google.script.url) {
+    google.script.url.getLocation(function (loc) {
+      if (loc.parameter && loc.parameter.embed === '1') document.body.classList.add('embed');
+    });
+  }
+  load();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+---
+import { url, media, formatDate } from '../lib/site.js';
+const { post } = Astro.props;
+---
+<a class="card" href={url(post.path)}>
+  <div class="card-media">
+    {post.image
+      ? <img src={media(post.image.src)} alt={post.image.alt} loading="lazy" width={post.image.width} height={post.image.height} />
+      : <img src={url('/images/bergsmo.jpg')} alt="" loading="lazy" />}
+  </div>
+  <div class="card-body">
+    <span class="card-meta">{formatDate(post.date)}{post.categories[0] && <> · {post.categories[0]}</>}</span>
+    <h3>{post.title}</h3>
+    {post.excerpt && <p class="muted" style="margin:0">{post.excerpt.length > 140 ? post.excerpt.slice(0, 140).replace(/\s\S*$/, '') + ' …' : post.excerpt}</p>}
+  </div>
+</a>

@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, url } from '../lib/site.js';
+const src = site.registrationUrl;
+const embedSrc = src ? `${src}${src.includes('?') ? '&' : '?'}embed=1` : '';
+---
+<Base title="Oppmøteregistrering" description="Registrer oppmøte på skytetrening i Namdal Sportsskytterlag.">
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">For medlemmer</p>
+      <h1>Oppmøteregistrering</h1>
+      <p>Registrer deg når du er på trening. Skyteleder velges av første skytter og huskes resten av dagen.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:40px">
+    <div class="wrap">
+      {src ? (
+        <>
+          <p class="muted">På nettbrettet ved standplass: <a href={src} target="_blank" rel="noopener">åpne registreringen i fullskjerm</a> og legg den til på startskjermen.</p>
+          <iframe class="reg-frame" src={embedSrc} title="Registrer tilstedeværelse" loading="lazy"></iframe>
+        </>
+      ) : (
+        <div class="aside-box" style="max-width:640px">
+          <h2>Registreringen er ikke koblet til ennå</h2>
+          <p class="muted" style="margin:0">Når Apps Script-appen er publisert, legges adressen inn som <code>PUBLIC_REGISTRATION_URL</code> i GitHub (Settings → Secrets and variables → Actions → Variables). Da vises skjemaet her.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</Base>
+<style>
+  .reg-frame { width: 100%; height: 1150px; border: 1px solid var(--border); border-radius: var(--radius-xl); margin-top: 16px; }
+</style>

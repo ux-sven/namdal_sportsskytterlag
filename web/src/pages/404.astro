@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/site.js';
+---
+<Base title="Fant ikke siden">
+  <section class="section">
+    <div class="wrap prose">
+      <p class="eyebrow">404</p>
+      <h1>Fant ikke siden</h1>
+      <p class="muted">Siden kan ha blitt flyttet da nettsiden ble fornyet.</p>
+      <p><a class="btn" href={url('/')}>Til forsiden</a> &nbsp; <a href={url('/nyheter/')}>Se nyheter</a></p>
+    </div>
+  </section>
+</Base>

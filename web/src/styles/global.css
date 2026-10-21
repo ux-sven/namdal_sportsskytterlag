@@ -1,0 +1,122 @@
+/* Tokens fra Figma-fila «Medlemsregister» (Geodata-designsystemet) */
+:root {
+  --text-primary: #101828;
+  --text-secondary: #475467;
+  --text-invert: #fcfcfd;
+  --text-brand: #1849a9;
+  --surface: #ffffff;
+  --surface-muted: #f6f7f9;
+  --surface-dark: #0f1a2e;
+  --surface-brand-light: #eef3fc;
+  --border: #e4e7ec;
+  --border-strong: #98a2b3;
+  --cta: #1849a9;
+  --cta-hover: #153e8f;
+  --accent: #f79009;
+  --radius-s: 4px;
+  --radius-l: 12px;
+  --radius-xl: 16px;
+  --shadow: 1px 4px 14px rgba(11, 11, 11, .12);
+  --font-head: "PT Serif", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --wrap: 1200px;
+  --gutter: clamp(16px, 4vw, 32px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--text-brand); text-underline-offset: 3px; }
+a:hover { color: var(--cta-hover); }
+:focus-visible { outline: 3px solid #84adff; outline-offset: 2px; border-radius: 2px; }
+h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 400; line-height: 1.25; margin: 0 0 .5em; }
+h1 { font-size: clamp(2rem, 4.5vw, 3.25rem); }
+h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); }
+h3 { font-size: 1.4rem; }
+h4, h5, h6 { font-family: var(--font-body); font-weight: 600; font-size: 1.05rem; margin: 1.4em 0 .4em; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.skip { position: absolute; left: -9999px; top: 8px; z-index: 100; background: var(--surface); padding: 8px 16px; }
+.skip:focus { left: 16px; }
+.eyebrow { font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: var(--text-brand); margin: 0 0 .5rem; }
+.muted { color: var(--text-secondary); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 22px; border-radius: var(--radius-s);
+  background: var(--cta); color: var(--text-invert); text-decoration: none; font-weight: 500;
+  border: 1px solid var(--cta); transition: background .15s;
+}
+.btn:hover { background: var(--cta-hover); color: var(--text-invert); }
+.btn-ghost { background: transparent; color: inherit; border-color: currentColor; }
+.btn-ghost:hover { background: rgba(255, 255, 255, .12); color: inherit; }
+.btn-light { background: #fff; color: var(--text-brand); border-color: #fff; }
+.btn-light:hover { background: var(--surface-brand-light); color: var(--text-brand); }
+
+/* Seksjoner */
+.section { padding: clamp(56px, 8vw, 96px) 0; }
+.section-muted { background: var(--surface-muted); }
+.section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+.section-head h2 { margin: 0; }
+
+.grid { display: grid; gap: 24px; }
+.grid-3 { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+
+.card {
+  display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-l); overflow: hidden; text-decoration: none; color: inherit;
+  transition: box-shadow .2s, transform .2s;
+}
+a.card:hover { box-shadow: var(--shadow); transform: translateY(-2px); color: inherit; }
+.card-media { aspect-ratio: 16 / 10; background: var(--surface-muted); overflow: hidden; }
+.card-media img { width: 100%; height: 100%; object-fit: cover; }
+.card-body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.card-body h3 { font-size: 1.3rem; margin: 0; }
+.card-meta { font-size: .9rem; color: var(--text-secondary); }
+.tag { display: inline-block; font-size: .8rem; font-weight: 600; color: var(--text-brand); background: var(--surface-brand-light); border-radius: 999px; padding: 2px 10px; }
+
+/* Tekstinnhold fra WordPress */
+.prose { max-width: 72ch; }
+.prose > :first-child { margin-top: 0; }
+.prose h2 { margin-top: 1.6em; }
+.prose h3 { margin-top: 1.4em; }
+.prose img { border-radius: var(--radius-l); margin: 1.5em 0; }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose li { margin: .3em 0; }
+.prose li > p { margin: 0; }
+.prose blockquote { margin: 1.5em 0; padding: .5em 1.2em; border-left: 4px solid var(--cta); color: var(--text-secondary); }
+.prose table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: .95rem; }
+.prose th, .prose td { border-bottom: 1px solid var(--border); padding: 10px 8px; text-align: left; }
+.prose iframe { width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: var(--radius-l); }
+.prose a.button {
+  display: inline-flex; min-height: 44px; align-items: center; padding: 0 18px; margin: .25em 0;
+  background: var(--cta); color: var(--text-invert); border-radius: var(--radius-s); text-decoration: none; font-weight: 500;
+}
+.prose a.button:hover { background: var(--cta-hover); }
+
+/* Sidetopp for undersider */
+.page-hero { background: var(--surface-dark); color: var(--text-invert); padding: clamp(48px, 7vw, 88px) 0 clamp(40px, 5vw, 64px); position: relative; overflow: hidden; }
+.page-hero .eyebrow { color: #a4bcfd; }
+.page-hero h1 { margin: 0; max-width: 20ch; }
+.page-hero p { color: #d0d5dd; max-width: 60ch; margin: 12px 0 0; }
+.page-hero.has-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15, 26, 46, .95) 30%, rgba(15, 26, 46, .55)); }
+.page-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.page-hero .wrap { position: relative; z-index: 1; }
+
+.layout-2 { display: grid; gap: 48px; grid-template-columns: minmax(0, 1fr) 320px; align-items: start; }
+.aside { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 16px; }
+.aside-box { border: 1px solid var(--border); border-radius: var(--radius-l); padding: 20px 22px; }
+.aside-box h2 { font-family: var(--font-body); font-size: 1rem; font-weight: 600; margin: 0 0 8px; }
+.aside-box ul { list-style: none; padding: 0; margin: 0; }
+.aside-box li a { display: block; padding: 8px 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+.aside-box li:last-child a { border: 0; }
+@media (max-width: 900px) { .layout-2 { grid-template-columns: 1fr; } .aside { position: static; } }

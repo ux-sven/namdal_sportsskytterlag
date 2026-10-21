@@ -1,0 +1,48 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import PostCard from '../../../../components/PostCard.astro';
+import { posts, site, url, html, media, formatDate } from '../../../../lib/site.js';
+
+export function getStaticPaths() {
+  return posts.map((post) => {
+    const [, year, month, day, slug] = post.path.split('/');
+    return { params: { year, month, day, slug }, props: { post } };
+  });
+}
+
+const { post } = Astro.props;
+const more = posts.filter((p) => p.id !== post.id).slice(0, 3);
+const image = post.image ? media(post.image.src) : null;
+---
+<Base title={post.title} description={post.excerpt} image={image}>
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow"><a href={url('/nyheter/')} style="color:inherit">Nyheter</a>{post.categories[0] && <> · {post.categories[0]}</>}</p>
+      <h1 style="max-width:28ch">{post.title}</h1>
+      <p><time datetime={post.date}>{formatDate(post.date)}</time></p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:48px">
+    <div class="wrap layout-2">
+      <article class="prose">
+        {image && <img src={image} alt={post.image.alt} width={post.image.width} height={post.image.height} style="margin-top:0" />}
+        <Fragment set:html={html(post.html)} />
+      </article>
+      <aside class="aside">
+        <div class="aside-box">
+          <h2>Spørsmål?</h2>
+          <p class="muted" style="margin:0 0 8px">Ta kontakt med klubben på e-post.</p>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+  {more.length > 0 && (
+    <section class="section section-muted">
+      <div class="wrap">
+        <div class="section-head"><h2>Flere nyheter</h2><a href={url('/nyheter/')}>Alle nyheter →</a></div>
+        <div class="grid grid-3">{more.map((p) => <PostCard post={p} />)}</div>
+      </div>
+    </section>
+  )}
+</Base>

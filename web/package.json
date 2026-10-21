@@ -1,0 +1,16 @@
+{
+  "name": "namdalssl-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "content": "node scripts/fetch-content.mjs",
+    "dev": "astro dev",
+    "build": "node scripts/fetch-content.mjs && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "5.18.2",
+    "sanitize-html": "2.18.1"
+  },
+  "engines": { "node": ">=20" }
+}

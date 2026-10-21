@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import { pages, nav, site, url, html, media } from '../lib/site.js';
+
+export function getStaticPaths() {
+  return pages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const heroImages = {
+  'dynamisk-sportsskyting': '/images/hero-dynamisk.jpg',
+  'norges-sportsskytterforbund': '/images/bane.jpg',
+  'vare-skytesporter': '/images/felt.jpg',
+  'oysletta-skytterbane': '/images/oysletta.jpg',
+  'om-2': '/images/bergsmo.jpg',
+  'sikkerhetskurs': '/images/bergsmo.jpg',
+};
+const group = nav.find((n) => (n.children || []).some((c) => c.href === `/${page.slug}/`));
+const hero = page.image ? media(page.image.src) : heroImages[page.slug] ? url(heroImages[page.slug]) : null;
+const body = html(page.html);
+const description = body.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160);
+---
+<Base title={page.title} description={description}>
+  <section class:list={['page-hero', { 'has-image': hero }]}>
+    {hero && <img class="page-hero-img" src={hero} alt="" />}
+    <div class="wrap">
+      <p class="eyebrow">{group ? group.label : site.name}</p>
+      <h1>{page.title}</h1>
+    </div>
+  </section>
+  <section class="section" style="padding-top:56px">
+    <div class="wrap layout-2">
+      <div>
+        <article class="prose" set:html={body} />
+        {page.hadForm && (
+          <div class="form-note">
+            <h2>{page.slug === 'kontakt' ? 'Send oss en melding' : 'Påmelding og skjema'}</h2>
+            <p class="muted">Send en e-post til klubben, så svarer vi så raskt vi kan. Skriv navn, telefonnummer og hva henvendelsen gjelder.</p>
+            <a class="btn" href={`mailto:${site.email}?subject=${encodeURIComponent(page.title)}`}>Send e-post</a>
+          </div>
+        )}
+      </div>
+      <aside class="aside">
+        {group && (
+          <nav class="aside-box" aria-label={group.label}>
+            <h2>{group.label}</h2>
+            <ul>{group.children.map((c) => <li><a href={url(c.href)} aria-current={c.href === `/${page.slug}/` ? 'page' : undefined}>{c.label}</a></li>)}</ul>
+          </nav>
+        )}
+        <div class="aside-box">
+          <h2>Spørsmål?</h2>
+          <p class="muted" style="margin:0 0 8px">Ta kontakt med klubben på e-post.</p>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .form-note { margin-top: 40px; padding: 28px; border-radius: var(--radius-l); background: var(--surface-brand-light); max-width: 72ch; }
+  .form-note h2 { font-size: 1.5rem; margin: 0 0 8px; }
+  .form-note p { margin: 0 0 16px; }
+</style>

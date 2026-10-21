@@ -1,0 +1,47 @@
+---
+import Logo from './Logo.astro';
+import { site, url } from '../lib/site.js';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap cols">
+    <div>
+      <div class="f-brand"><Logo size={36} /><span>{site.name}</span></div>
+      <p>{site.description}</p>
+      <div class="partners">
+        <img src={url('/images/nsf.png')} alt="Norges Sportsskytterforbund" width="64" height="64" loading="lazy" />
+        <img src={url('/images/dssn.png')} alt="Dynamisk Sportsskyting Norge" width="64" height="64" loading="lazy" />
+      </div>
+    </div>
+    <div>
+      <h2>Kontakt</h2>
+      <p><a href={`mailto:${site.email}`}>{site.email}</a><br />{site.address.join(', ')}</p>
+      <p><a href={site.facebook} target="_blank" rel="noopener">Facebook</a></p>
+    </div>
+    <div>
+      <h2>Snarveier</h2>
+      <ul>
+        <li><a href={url('/sikkerhetskurs/')}>Sikkerhetskurs</a></li>
+        <li><a href={url('/kalender/')}>Aktivitetskalender</a></li>
+        <li><a href={url('/dokumenter/')}>Dokumenter og skjema</a></li>
+        <li><a href={url('/oppmoteregistrering/')}>Oppmøteregistrering</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap legal">© {year} {site.name}</div>
+</footer>
+
+<style>
+  .site-footer { background: var(--surface-dark); color: #d0d5dd; padding: 64px 0 24px; margin-top: auto; }
+  .site-footer a { color: #fff; }
+  .cols { display: grid; gap: 40px; grid-template-columns: 2fr 1fr 1fr; }
+  @media (max-width: 800px) { .cols { grid-template-columns: 1fr; } }
+  .f-brand { display: flex; align-items: center; gap: 12px; font-family: var(--font-head); font-size: 1.25rem; color: #fff; margin-bottom: 12px; }
+  .site-footer p { margin: 0 0 12px; max-width: 46ch; }
+  h2 { font-family: var(--font-body); font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: #fff; margin: 0 0 12px; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li a { display: inline-block; padding: 4px 0; }
+  .partners { display: flex; gap: 12px; margin-top: 20px; }
+  .partners img { width: 64px; height: 64px; object-fit: contain; background: #fff; border-radius: 8px; padding: 6px; }
+  .legal { border-top: 1px solid rgba(255,255,255,.12); margin-top: 48px; padding-top: 20px; font-size: .9rem; }
+</style>
