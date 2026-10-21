@@ -1,6 +1,6 @@
 /**
  * Stopper byggingen hvis noen farge er hardkodet utenfor tokens.css.
- * Alle farger skal komme fra Namsos kommunes fargepalett (var(--n-…) i tokens.css).
+ * Alle farger skal komme fra fargepaletten fra namdalssl.no (var(--c-…) i tokens.css).
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -39,4 +39,4 @@ if (problems.length) {
   console.error(`Fant ${problems.length} farge(r) som ikke kommer fra fargepaletten (tokens.css):\n` + problems.join('\n'));
   process.exit(1);
 }
-console.log('Fargesjekk OK – alle farger kommer fra Namsos-paletten (tokens.css).');
+console.log('Fargesjekk OK – alle farger kommer fra NSSL-paletten (tokens.css).');

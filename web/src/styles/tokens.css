@@ -1,13 +1,11 @@
-/* GENERERT – ikke rediger. Kilde: Namsos kommunes grafiske profil (fargenavn fra namsos.kommune.no/brukervennlig-innhold/grafisk-profil/). Verdiene er hentet fra namsos.kommune.no sitt stilark og logo, ikke fra profilhåndboken – bekreft mot håndboken (kommunikasjon@namsos.kommune.no)., eksportert 2026-10-21.
-   Oppdater namsos-tokens.json og kjør «npm run tokens». */
+/* GENERERT – ikke rediger. Kilde: Fargepaletten på namdalssl.no (Avada globale farger --awb-color1–8, lest 21.10.2026), eksportert 2026-10-21.
+   Oppdater nssl-tokens.json og kjør «npm run tokens». */
 :root {
-  --n-primaer-namsosgronn: #4f8330; /* Namsos/primær/namsosgronn */
-  --n-primaer-hvit: #ffffff; /* Namsos/primær/hvit */
-  --n-stotte-lys-gra: #ededed; /* Namsos/stotte/lys-gra */
-  --n-stotte-lys-gra-flate: #f8f8f8; /* Namsos/stotte/lys-gra-flate */
-  --n-stotte-industrigra: #575e62; /* Namsos/stotte/industrigra */
-  --n-stotte-sort: #3c3c3c; /* Namsos/stotte/sort */
-  --n-sekundaer-lovgronn: #d8e6b9; /* Namsos/sekundaer/lovgronn */
-  --n-sekundaer-korngul: #e7a634; /* Namsos/sekundaer/korngul */
-  --n-sekundaer-fjordbla: #3b6f7b; /* Namsos/sekundaer/fjordbla */
+  --c-hvit: #ffffff; /* NSSL/hvit */
+  --c-lys-gul: #ffe9b3; /* NSSL/lys-gul */
+  --c-lavendel: #b8a9d8; /* NSSL/lavendel */
+  --c-bla: #3269ff; /* NSSL/bla */
+  --c-duebla: #425a9e; /* NSSL/duebla */
+  --c-marine: #0f2385; /* NSSL/marine */
+  --c-natt: #040922; /* NSSL/natt */
 }

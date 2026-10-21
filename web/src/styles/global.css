@@ -2,51 +2,51 @@
 
 /*
  * Designet bygger på referansen «Fishing and Hunting Club Landing Page» (Dribbble).
- * ALLE farger kommer fra Namsos kommunes grafiske profil (tokens.css, --n-*).
- * Semantiske navn under peker bare på --n-*; gjennomsiktighet og hover lages med color-mix()
+ * ALLE farger kommer fra fargepaletten på dagens namdalssl.no (tokens.css, --c-*).
+ * Semantiske navn under peker bare på --c-*; gjennomsiktighet og hover lages med color-mix()
  * av de samme fargene. «npm run check:tokens» stopper byggingen hvis en farge er hardkodet.
  */
 :root {
   /* Flater */
-  --paper: var(--n-stotte-lys-gra-flate);                 /* lys grå flate */
-  --paper-deep: var(--n-stotte-lys-gra);                  /* lys grå */
-  --paper-grain: var(--n-stotte-lys-gra);
-  --card: var(--n-primaer-hvit);                          /* hvit */
-  --forest: var(--n-primaer-namsosgronn);                 /* Namsosgrønn – profilens primærfarge */
-  --night: var(--n-stotte-sort);                          /* sort */
-  --night-soft: var(--n-stotte-industrigra);              /* industrigrå */
+  --paper: var(--c-hvit);
+  --paper-deep: color-mix(in srgb, var(--c-lavendel) 16%, var(--c-hvit));
+  --paper-grain: color-mix(in srgb, var(--c-duebla) 14%, var(--c-hvit));
+  --card: var(--c-hvit);
+  --forest: var(--c-marine);                              /* mørk seksjon (skytebaner) */
+  --night: var(--c-natt);                                 /* meny, bunntekst */
+  --night-soft: var(--c-duebla);
 
   /* Tekst */
-  --ink: var(--n-stotte-sort);
-  --ink-soft: var(--n-stotte-industrigra);
-  --ink-invert: var(--n-primaer-hvit);
-  --ink-invert-soft: color-mix(in srgb, var(--n-primaer-hvit) 88%, transparent);
-  --ink-invert-muted: color-mix(in srgb, var(--n-primaer-hvit) 72%, transparent);
-  --link: var(--n-sekundaer-fjordbla);                    /* fjordblå – lenker */
-  --link-hover: var(--n-primaer-namsosgronn);
+  --ink: var(--c-natt);
+  --ink-soft: var(--c-duebla);
+  --ink-invert: var(--c-hvit);
+  --ink-invert-soft: color-mix(in srgb, var(--c-hvit) 86%, transparent);
+  --ink-invert-muted: color-mix(in srgb, var(--c-hvit) 70%, transparent);
+  --link: var(--c-bla);
+  --link-hover: var(--c-marine);
 
-  /* Aksent: Namsosgrønn på knapper, korngul (sparsomt) på merkelapper og nåler */
-  --accent: var(--n-primaer-namsosgronn);
-  --accent-hover: color-mix(in srgb, var(--n-primaer-namsosgronn) 82%, var(--n-stotte-sort));
-  --on-accent: var(--n-primaer-hvit);
-  --highlight: var(--n-sekundaer-korngul);
-  --on-highlight: var(--n-stotte-sort);
-  --leaf: var(--n-sekundaer-lovgronn);                    /* løvgrønn – valgt rad, rolige flater */
+  /* Aksent: blå knapper som på namdalssl.no, lys gul på mørk bakgrunn */
+  --accent: var(--c-bla);
+  --accent-hover: var(--c-marine);
+  --on-accent: var(--c-hvit);
+  --highlight: var(--c-lys-gul);
+  --on-highlight: var(--c-natt);
+  --leaf: color-mix(in srgb, var(--c-lavendel) 38%, var(--c-hvit));
 
   /* Linjer, glass og skygger */
-  --line: var(--n-stotte-lys-gra);
-  --line-strong: color-mix(in srgb, var(--n-stotte-industrigra) 45%, var(--n-primaer-hvit));
-  --glass: color-mix(in srgb, var(--n-stotte-sort) 74%, transparent);
-  --glass-line: color-mix(in srgb, var(--n-primaer-hvit) 18%, transparent);
-  --glass-hover: color-mix(in srgb, var(--n-primaer-hvit) 14%, transparent);
-  --scrim: color-mix(in srgb, var(--n-stotte-sort) 45%, transparent);
-  --scrim-strong: color-mix(in srgb, var(--n-stotte-sort) 78%, transparent);
-  --shadow-color: color-mix(in srgb, var(--n-stotte-sort) 16%, transparent);
-  --focus: var(--n-sekundaer-fjordbla);
-  --error: color-mix(in srgb, var(--n-sekundaer-korngul) 35%, var(--n-stotte-sort));
-  --error-surface: color-mix(in srgb, var(--n-sekundaer-korngul) 18%, var(--n-primaer-hvit));
-  --success: var(--n-primaer-namsosgronn);
-  --success-surface: var(--n-sekundaer-lovgronn);
+  --line: color-mix(in srgb, var(--c-lavendel) 35%, var(--c-hvit));
+  --line-strong: color-mix(in srgb, var(--c-duebla) 55%, var(--c-hvit));
+  --glass: color-mix(in srgb, var(--c-natt) 78%, transparent);
+  --glass-line: color-mix(in srgb, var(--c-hvit) 16%, transparent);
+  --glass-hover: color-mix(in srgb, var(--c-hvit) 12%, transparent);
+  --scrim: color-mix(in srgb, var(--c-natt) 40%, transparent);
+  --scrim-strong: color-mix(in srgb, var(--c-natt) 80%, transparent);
+  --shadow-color: color-mix(in srgb, var(--c-natt) 14%, transparent);
+  --focus: var(--c-bla);
+  --error: var(--c-marine);
+  --error-surface: var(--c-lys-gul);
+  --success: var(--c-marine);
+  --success-surface: color-mix(in srgb, var(--c-lavendel) 38%, var(--c-hvit));
 
   --radius-s: 6px;
   --radius-l: 14px;

@@ -1,0 +1,13 @@
+{
+  "source": "Fargepaletten på namdalssl.no (Avada globale farger --awb-color1–8, lest 21.10.2026)",
+  "exported": "2026-10-21",
+  "colors": {
+    "NSSL/hvit":     { "value": "#ffffff", "note": "awb-color1/3 – bakgrunn" },
+    "NSSL/lys-gul":  { "value": "#ffe9b3", "note": "awb-color2 – aksent på mørk bakgrunn" },
+    "NSSL/lavendel": { "value": "#b8a9d8", "note": "awb-color4" },
+    "NSSL/bla":      { "value": "#3269ff", "note": "awb-color5 – primærfarge, lenker og knappekanter" },
+    "NSSL/duebla":   { "value": "#425a9e", "note": "awb-color6" },
+    "NSSL/marine":   { "value": "#0f2385", "note": "awb-color7 – knapper («Load more»), former i bunnteksten" },
+    "NSSL/natt":     { "value": "#040922", "note": "awb-color8 – tekst, meny og bunntekst" }
+  }
+}
