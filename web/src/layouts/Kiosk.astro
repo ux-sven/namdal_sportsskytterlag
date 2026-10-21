@@ -1,0 +1,55 @@
+---
+/* Nettbrettmodus: bare registreringen – ingen meny, lenker eller bunntekst. */
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import { site, url } from '../lib/site.js';
+const { title = 'Oppmøte' } = Astro.props;
+---
+<!doctype html>
+<html lang="nb">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title} – {site.name}</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="manifest" href={url('/nettbrett.webmanifest')} />
+    <link rel="apple-touch-icon" href={url('/images/app-icon-180.png')} />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="NSSL Oppmøte" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=PT+Serif:ital@0;1&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="kiosk">
+    <div class="paper kiosk-shell">
+      <header class="kiosk-bar">
+        <div class="kiosk-brand"><Logo size={40} /><span>{site.name}</span></div>
+        <div class="kiosk-title">
+          <h1>Registrer <em>oppmøte</em></h1>
+          <p id="lead">Skyteleder velges av første skytter og huskes resten av dagen.</p>
+        </div>
+      </header>
+      <main class="kiosk-main"><slot /></main>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  body.kiosk { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; overscroll-behavior: none; }
+  body.kiosk input { -webkit-user-select: text; user-select: text; }
+  .kiosk-shell { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+  .kiosk-bar {
+    background: var(--night); color: var(--ink-invert);
+    padding: calc(env(safe-area-inset-top) + 20px) var(--gutter) 28px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;
+  }
+  .kiosk-brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-head); font-size: 1.15rem; color: var(--ink-invert-soft); }
+  .kiosk-title h1 { font-size: clamp(2rem, 4.5vw, 3rem); margin: 0; }
+  .kiosk-title h1 em { display: inline; }
+  .kiosk-title p { margin: 8px 0 0; color: var(--ink-invert-soft); }
+  .kiosk-main { flex: 1; display: flex; justify-content: center; padding: 28px var(--gutter) calc(env(safe-area-inset-bottom) + 28px); }
+  .kiosk-main .reg-wrap { width: 100%; max-width: 760px; }
+</style>

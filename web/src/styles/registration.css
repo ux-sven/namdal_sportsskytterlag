@@ -66,3 +66,22 @@
 .success .countdown { font-size: .9rem; }
 .success .reg-submit { margin-top: 16px; }
 .demo-note { margin-top: 20px; color: var(--ink-soft); font-size: .92rem; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+
+/* Knapp til nettbrettmodus */
+.kiosk-cta { box-sizing: border-box; width: calc(100% - 2 * var(--gutter)); max-width: calc(760px - 2 * var(--gutter)); margin: 0 auto 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap; padding: 18px 22px; border-radius: var(--radius-l); background: var(--paper-deep); }
+.kiosk-cta > div { display: flex; flex-direction: column; }
+.kiosk-cta .muted { font-size: .95rem; }
+.btn-ghost-dark { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-ghost-dark:hover { background: var(--ink); color: var(--ink-invert); border-color: var(--ink); }
+
+/* Nettbrettmodus: større trykkflater og tekst */
+body.kiosk .reg-card { box-shadow: var(--shadow); }
+body.kiosk .textbox, body.kiosk .readonly { min-height: 64px; }
+body.kiosk .textbox input, body.kiosk .option { font-size: 20px; }
+body.kiosk .option { min-height: 56px; }
+body.kiosk .segmented span { min-height: 52px; padding: 0 28px; font-size: 1.05rem; }
+body.kiosk .reg-submit { min-height: 68px; font-size: 1.2rem; }
+body.kiosk .check-row { min-height: 52px; font-size: 1.05rem; }
+body.kiosk .check-row input { width: 28px; height: 28px; }
+body.kiosk .listbox { max-height: min(420px, 45vh); }
+.idle-note { margin-top: 12px; text-align: center; color: var(--ink-soft); font-size: .9rem; }

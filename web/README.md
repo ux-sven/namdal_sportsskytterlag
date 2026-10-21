@@ -41,6 +41,22 @@ Siden `/oppmoteregistrering/` er bygget inn i nettsiden (`src/pages/oppmoteregis
 via Apps Script-API-et (`../apps-script/Code.gs`, `doPost`). Uten `PUBLIC_REGISTRATION_URL` kjører den
 med testdata (merket «Demo»). Legg til `?state=husket` i adressen for å se tilstanden med husket skyteleder.
 
+### Nettbrettmodus (iPad ved standplass)
+
+`/oppmoteregistrering/nettbrett/` viser bare skjemaet – uten meny, lenker og bunntekst – og åpnes fra
+knappen «Åpne nettbrettmodus» på registreringssiden. I nettbrettmodus:
+
+- tømmes et halvutfylt skjema etter 90 sekunder uten aktivitet,
+- hentes medlemsliste og dagens skyteleder på nytt hvert 10. minutt og når nettbrettet vekkes (ny dag),
+- holdes skjermen våken der nettleseren støtter det (Screen Wake Lock),
+- kan siden legges på Hjem-skjermen og åpnes i fullskjerm som en egen app («NSSL Oppmøte»).
+
+Oppsett på iPad:
+1. Åpne nettbrettmodus i Safari → Del-knappen → **Legg til på Hjem-skjerm**. Åpne appen og skriv inn tilgangskoden én gang.
+2. **Innstillinger → Skjerm og lysstyrke → Automatisk lås: Aldri** (og la iPaden stå til lading).
+3. Lås iPaden til appen med **Veiledet tilgang**: Innstillinger → Tilgjengelighet → Veiledet tilgang → på, og velg en kode.
+   Åpne appen og trippeltrykk sideknappen for å starte. Trippeltrykk og koden avslutter.
+
 ## Utvikle lokalt
 
 ```bash

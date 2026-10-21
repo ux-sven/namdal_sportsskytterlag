@@ -1,0 +1,24 @@
+{
+  "name": "NSSL Oppmøteregistrering",
+  "short_name": "NSSL Oppmøte",
+  "start_url": "oppmoteregistrering/nettbrett/",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#040922",
+  "lang": "nb",
+  "icons": [
+    {
+      "src": "images/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

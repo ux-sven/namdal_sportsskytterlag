@@ -244,7 +244,7 @@ class Combobox {
 
 /* ---------------- Skjema ---------------- */
 
-export function initRegistration(root) {
+export function initRegistration(root, { kiosk = false } = {}) {
   if (!root) return;
   const api = createApi(root.dataset.api);
   const $ = (id) => root.querySelector(`#${id}`);
@@ -427,4 +427,55 @@ export function initRegistration(root) {
   }
 
   load();
+
+  if (kiosk) setupKiosk();
+
+  /* Nettbrettmodus: nullstill halvutfylt skjema, hold lista oppdatert og skjermen våken. */
+  function setupKiosk() {
+    const IDLE_RESET_MS = 90 * 1000;      // tøm skjema som er glemt halvveis
+    const REFRESH_MS = 10 * 60 * 1000;    // hent medlemsliste og skyteleder på nytt
+    let idleTimer = null;
+    let lastActivity = Date.now();
+
+    const isDirty = () =>
+      !!(memberCombo.input.value || leaderCombo.input.value || invitedCombo.input.value ||
+         $('guestName').value || $('confirm').checked || currentType() !== 'medlem' || state.changingLeader);
+
+    const onActivity = () => {
+      lastActivity = Date.now();
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        if (!$('formView').hidden && isDirty()) { resetForm(); load(); }
+      }, IDLE_RESET_MS);
+      requestWakeLock();
+    };
+    ['pointerdown', 'keydown', 'input'].forEach((ev) => root.addEventListener(ev, onActivity, { passive: true }));
+
+    setInterval(() => {
+      const idleFor = Date.now() - lastActivity;
+      if (!$('formView').hidden && !isDirty() && idleFor > 60 * 1000) load();
+    }, REFRESH_MS);
+
+    // Ny dag eller nettbrettet har ligget i dvale: hent ferske data når siden blir synlig igjen.
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        requestWakeLock();
+        if (!$('formView').hidden && !isDirty()) load();
+      }
+    });
+
+    let wakeLock = null;
+    async function requestWakeLock() {
+      try {
+        if ('wakeLock' in navigator && !wakeLock) {
+          wakeLock = await navigator.wakeLock.request('screen');
+          wakeLock.addEventListener('release', () => { wakeLock = null; });
+        }
+      } catch { /* ikke støttet eller ikke tillatt – nettbrettets egen innstilling gjelder */ }
+    }
+    requestWakeLock();
+
+    // Ingen høyreklikk/langt trykk-meny i nettbrettmodus.
+    document.addEventListener('contextmenu', (e) => { if (!e.target.closest('input')) e.preventDefault(); });
+  }
 }

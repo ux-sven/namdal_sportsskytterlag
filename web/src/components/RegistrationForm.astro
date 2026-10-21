@@ -1,0 +1,97 @@
+---
+/* Selve registreringsskjemaet – brukes både på /oppmoteregistrering/ og i nettbrettmodus. */
+import '../styles/registration.css';
+import { site } from '../lib/site.js';
+const { kiosk = false } = Astro.props;
+const demo = !site.registrationUrl;
+---
+<div class:list={["reg-wrap", { wrap: !kiosk }]} id="reg" data-api={site.registrationUrl} data-kiosk={kiosk ? "1" : undefined}>
+  <div class="reg-status" id="loadingView" role="status">Laster medlemslisten …</div>
+
+  <div class="reg-card" id="pinView" hidden>
+    <form id="pinForm" class="reg-form" novalidate>
+      <div>
+        <label class="reg-label" for="pin">Tilgangskode</label>
+        <div class="textbox"><input id="pin" inputmode="numeric" autocomplete="off" placeholder="Skriv inn klubbens kode" /></div>
+        <div class="field-error" id="pinError" hidden>Feil kode. Prøv igjen.</div>
+      </div>
+      <button class="btn reg-submit" type="submit">Fortsett</button>
+    </form>
+  </div>
+
+  <div class="reg-card" id="formView" hidden>
+    <form id="form" class="reg-form" novalidate>
+      <fieldset>
+        <legend>Jeg er</legend>
+        <div class="segmented">
+          <label><input type="radio" name="type" value="medlem" checked /> <span>Medlem</span></label>
+          <label><input type="radio" name="type" value="gjest" /> <span>Gjest</span></label>
+        </div>
+      </fieldset>
+
+      <div id="memberBlock"></div>
+
+      <div id="guestBlock" hidden>
+        <div>
+          <label class="reg-label" for="guestName">Navn på gjest</label>
+          <div class="textbox" id="guestBox"><input id="guestName" autocomplete="off" placeholder="Fornavn og etternavn" /></div>
+          <div class="field-error" id="guestError" hidden></div>
+        </div>
+        <div id="invitedBlock" style="margin-top:24px"></div>
+      </div>
+
+      <div id="leaderBlock">
+        <div id="leaderPick">
+          <div id="leaderCombo"></div>
+          <p class="help" id="leaderHelp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-6h2v6Zm0-8h-2V7h2v2Z"/></svg>
+            Velges én gang per trening. De som registrerer seg etter deg slipper å velge skyteleder.
+          </p>
+          <button type="button" class="text-btn" id="cancelChange" hidden>Avbryt endring</button>
+        </div>
+        <div class="remembered" id="leaderRemembered" hidden>
+          <span class="remembered-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+          </span>
+          <div class="remembered-text">
+            <span class="small">Skyteleder i dag</span>
+            <strong id="leaderName"></strong>
+            <span class="small" id="leaderSetAt"></span>
+          </div>
+          <button type="button" class="text-btn" id="changeLeader">Endre</button>
+        </div>
+      </div>
+
+      <div>
+        <span class="reg-label">Dato</span>
+        <div class="readonly" id="dateText"></div>
+      </div>
+
+      <div>
+        <label class="check-row"><input type="checkbox" id="confirm" /> Jeg bekrefter at jeg er tilstede for skytetreningen i dag</label>
+        <div class="field-error" id="confirmError" hidden>Kryss av for å bekrefte at du er til stede.</div>
+      </div>
+
+      <div class="alert" id="formAlert" role="alert" hidden></div>
+      <button class="btn reg-submit" type="submit" id="submitBtn">Registrer tilstedeværelse</button>
+    </form>
+  </div>
+
+  <div class="reg-card success" id="successView" hidden aria-live="polite">
+    <div class="success-mark" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <h2 id="successTitle">Takk!</h2>
+    <p id="successText"></p>
+    <p class="countdown" id="countdown"></p>
+    <button class="btn reg-submit" type="button" id="nextBtn">Registrer neste</button>
+  </div>
+
+  {demo && <p class="demo-note"><span class="tag">Demo</span> Registreringen er ikke koblet til regnearket ennå, så skjemaet bruker testdata. Legg inn <code>PUBLIC_REGISTRATION_URL</code> i GitHub for å koble den til.</p>}
+</div>
+
+<script>
+  import { initRegistration } from '../scripts/registration.js';
+  const root = document.getElementById('reg');
+  initRegistration(root, { kiosk: root?.dataset.kiosk === '1' });
+</script>
