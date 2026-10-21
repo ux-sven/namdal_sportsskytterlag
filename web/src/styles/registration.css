@@ -68,9 +68,7 @@
 .demo-note { margin-top: 20px; color: var(--ink-soft); font-size: .92rem; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
 
 /* Knapp til nettbrettmodus */
-.kiosk-cta { box-sizing: border-box; width: calc(100% - 2 * var(--gutter)); max-width: calc(760px - 2 * var(--gutter)); margin: 0 auto 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap; padding: 18px 22px; border-radius: var(--radius-l); background: var(--paper-deep); }
-.kiosk-cta > div { display: flex; flex-direction: column; }
-.kiosk-cta .muted { font-size: .95rem; }
+.kiosk-cta { box-sizing: border-box; width: calc(100% - 2 * var(--gutter)); max-width: calc(760px - 2 * var(--gutter)); margin: 24px auto 0; display: flex; justify-content: center; }
 .btn-ghost-dark { background: transparent; color: var(--ink); border-color: var(--ink); }
 .btn-ghost-dark:hover { background: var(--ink); color: var(--ink-invert); border-color: var(--ink); }
 

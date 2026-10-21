@@ -14,16 +14,12 @@ import { url } from '../lib/site.js';
   </section>
 
   <section class="section reg-section">
+    <RegistrationForm />
     <div class="kiosk-cta">
-      <div>
-        <strong>Skal nettbrettet stå ved standplass?</strong>
-        <span class="muted">Nettbrettmodus viser bare registreringen – uten meny og lenker.</span>
-      </div>
       <a class="btn btn-ghost-dark" href={url('/oppmoteregistrering/nettbrett/')} target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M11 18h2"/></svg>
         Åpne nettbrettmodus
       </a>
     </div>
-    <RegistrationForm />
   </section>
 </Base>
