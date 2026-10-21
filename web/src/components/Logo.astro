@@ -1,8 +1,6 @@
 ---
+import { url } from '../lib/site.js';
 const { size = 40 } = Astro.props;
+const src = size > 96 ? '/images/logo-nssl.png' : '/images/logo-nssl-96.png';
 ---
-<svg class="logo" width={size} height={size} viewBox="0 0 48 48" aria-hidden="true">
-  <circle cx="24" cy="24" r="24" style="fill:var(--accent)" />
-  <g fill="none" style="stroke:var(--on-accent)" stroke-width="3"><circle cx="24" cy="24" r="14" /><circle cx="24" cy="24" r="8" /></g>
-  <circle cx="24" cy="24" r="3" style="fill:var(--on-accent)" />
-</svg>
+<img class="logo" src={url(src)} width={size} height={size} alt="" style="display:block;flex:none;border-radius:50%" />

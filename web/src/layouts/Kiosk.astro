@@ -12,7 +12,8 @@ const { title = 'Oppmøte' } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title} – {site.name}</title>
     <meta name="robots" content="noindex" />
-    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={url('/favicon-32.png')} type="image/png" sizes="32x32" />
+    <link rel="icon" href={url('/favicon.png')} type="image/png" sizes="64x64" />
     <link rel="manifest" href={url('/nettbrett.webmanifest')} />
     <link rel="apple-touch-icon" href={url('/images/app-icon-180.png')} />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -26,7 +27,7 @@ const { title = 'Oppmøte' } = Astro.props;
   <body class="kiosk">
     <div class="paper kiosk-shell">
       <header class="kiosk-bar">
-        <div class="kiosk-brand"><Logo size={40} /><span>{site.name}</span></div>
+        <div class="kiosk-brand"><Logo size={84} /><span>{site.name}</span></div>
         <div class="kiosk-title">
           <h1>Registrer <em>oppmøte</em></h1>
           <p id="lead">Skyteleder velges av første skytter og huskes resten av dagen.</p>
